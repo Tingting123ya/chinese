@@ -2,29 +2,32 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>¡Hola Chino! 🇹🇼 台灣語音與生活美食大百科</title>
+  <title>¡Hola Chino! 🇹🇼 台灣生活語音與文化大百科</title>
   <style>
     :root {
-      --bg: #0b1120;
+      --bg: #090d16;
       --card-bg: #151d30;
       --card-sub: #1e293b;
       --accent: #22c55e;
       --text-main: #f8fafc;
       --text-sub: #94a3b8;
       --border: #334155;
+      --pinyin: #38bdf8;
+      --zhuyin: #f59e0b;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     body { background-color: var(--bg); color: var(--text-main); padding-bottom: 90px; }
 
     /* 頂部狀態列 */
-    header { background-color: rgba(21, 29, 48, 0.95); backdrop-filter: blur(10px); padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border); position: sticky; top: 0; z-index: 100; }
+    header { background-color: rgba(21, 29, 48, 0.95); backdrop-filter: blur(12px); padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border); position: sticky; top: 0; z-index: 100; }
     .brand-box { font-size: 1.25rem; font-weight: 900; color: #facc15; }
     .ctrl-group { display: flex; gap: 8px; }
     .btn-toggle { background: #334155; color: #fff; border: 2px solid #475569; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; font-weight: 800; }
     .btn-toggle.active { background: #facc15; color: #000; border-color: #eab308; }
 
-    /* 主導覽 */
+    /* 導覽列 */
     .nav-container { max-width: 980px; margin: 16px auto 0; padding: 0 16px; overflow-x: auto; }
     .main-nav { display: flex; gap: 8px; border-bottom: 2px solid var(--border); padding-bottom: 8px; }
     .nav-tab-btn { background: #151d30; color: #94a3b8; border: 2px solid var(--border); padding: 10px 18px; border-radius: 14px; font-size: 0.95rem; cursor: pointer; white-space: nowrap; font-weight: 800; }
@@ -34,14 +37,22 @@
     .card { background-color: var(--card-bg); border-radius: 22px; padding: 24px; border: 2px solid var(--border); }
     .card-title { font-size: 1.3rem; font-weight: 900; margin-bottom: 16px; color: #f8fafc; }
 
-    /* ================= 截圖專屬白色語音卡片 ================= */
+    .sub-tabs { display: flex; gap: 8px; margin-bottom: 16px; overflow-x: auto; padding-bottom: 4px; }
+    .sub-btn { background: #1e293b; color: #cbd5e1; border: 2px solid #334155; padding: 8px 16px; border-radius: 10px; font-size: 0.9rem; cursor: pointer; white-space: nowrap; font-weight: 700; }
+    .sub-btn.active { background: #10b981; color: #000; border-color: #059669; font-weight: 900; }
+
+    .pho-py { color: var(--pinyin); margin-right: 8px; font-weight: 700; }
+    .pho-zy { color: var(--zhuyin); font-weight: 700; }
+    .audio-btn { background: #1e293b; border: 2px solid #475569; cursor: pointer; font-size: 1rem; padding: 4px 10px; border-radius: 14px; color: #fff; vertical-align: middle; margin-left: 6px; }
+    .audio-btn:hover { background: #3b82f6; border-color: #60a5fa; }
+
+    /* ================= 截圖專屬白色語音卡片樣式 ================= */
     .phonetic-wrapper { background: #ffffff; border-radius: 22px; padding: 24px; color: #1e293b; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
     .phonetic-header-tag { font-size: 0.8rem; font-weight: 800; color: #9333ea; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 4px; }
     .phonetic-header-title { font-size: 1.55rem; font-weight: 900; color: #0f172a; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
     .phonetic-header-desc { font-size: 0.9rem; color: #64748b; line-height: 1.45; margin-bottom: 20px; }
     .letter-badge-a { background: #ef4444; color: #ffffff; font-weight: 900; width: 34px; height: 34px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
 
-    /* 四聲調卡片 */
     .tones-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; margin-bottom: 22px; }
     .tone-card { border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; border: 1.5px solid transparent; }
     .tone-card-top { display: flex; justify-content: space-between; align-items: center; }
@@ -53,16 +64,13 @@
     .tone-yellow { background: #fefce8; border-color: #fef08a; color: #ca8a04; }
     .tone-green { background: #f0fdf4; border-color: #bbf7d0; color: #16a34a; }
     .tone-blue { background: #eff6ff; border-color: #bfdbfe; color: #2563eb; }
-
     .speaker-btn { background: transparent; border: none; font-size: 1.15rem; cursor: pointer; color: inherit; }
 
-    /* 聲母 / 韻母 切換按鈕組 */
     .phonetic-pills { display: flex; gap: 10px; margin-bottom: 20px; }
     .pill-btn { border: none; padding: 10px 22px; border-radius: 30px; font-size: 0.95rem; font-weight: 800; cursor: pointer; }
     .pill-btn.active { background: #22c55e; color: #ffffff; }
     .pill-btn.inactive { background: #f1f5f9; color: #334155; }
 
-    /* 語音卡片網格 */
     .phonetic-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
     .p-card { background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.03); }
     .p-card-top { display: flex; justify-content: space-between; align-items: center; }
@@ -74,6 +82,12 @@
     .p-card-speaker { background: #22c55e; color: #ffffff; border: none; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; }
     .p-card-truco { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 8px 12px; font-size: 0.78rem; color: #475569; line-height: 1.35; }
     .p-card-truco b { color: #16a34a; }
+
+    /* 單字卡網格 */
+    .vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+    .vocab-card { background: var(--card-sub); border: 2px solid var(--border); border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; }
+    .vocab-top { display: flex; justify-content: space-between; align-items: center; }
+    .vocab-zh { font-size: 1.15rem; font-weight: 800; color: #fff; }
 
     /* 美食卡片與對話 */
     .food-card-modern { background: var(--card-sub); border: 2px solid var(--border); border-radius: 18px; padding: 18px; margin-bottom: 18px; display: flex; flex-direction: column; gap: 12px; }
@@ -88,9 +102,15 @@
     .chat-bubble.tourist { align-self: flex-start; background: #2563eb; border-bottom-left-radius: 4px; }
     .chat-bubble.local { align-self: flex-end; background: #334155; border-bottom-right-radius: 4px; }
 
-    .audio-btn { background: #1e293b; border: 2px solid #475569; cursor: pointer; font-size: 1rem; padding: 4px 10px; border-radius: 14px; color: #fff; margin-left: 6px; }
+    /* 3D 抽認卡 */
+    .flashcard-wrap { perspective: 1000px; max-width: 480px; margin: 0 auto; height: 280px; }
+    .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); transform-style: preserve-3d; cursor: pointer; }
+    .flashcard-inner.flipped { transform: rotateY(180deg); }
+    .fc-front, .fc-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 24px; padding: 24px; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 3px solid #475569; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    .fc-front { background: linear-gradient(145deg, #1e293b, #0f172a); }
+    .fc-back { background: linear-gradient(145deg, #1e3a5f, #0f2744); transform: rotateY(180deg); text-align: center; }
 
-    /* 分頁顯示/隱藏 */
+    /* 分頁顯示切換 */
     .tab-section { display: none; }
     .tab-section.active { display: block !important; }
   </style>
@@ -108,57 +128,8 @@
   <div class="nav-container">
     <div class="main-nav">
       <button id="nav-btn-phonetics" class="nav-tab-btn active" onclick="switchNavTab('phonetics')">🔤 語音對照 (截圖同款)</button>
+      <button id="nav-btn-vocab" class="nav-tab-btn" onclick="switchNavTab('vocab')">🏷️ 生活實用單字庫</button>
       <button id="nav-btn-foods" class="nav-tab-btn" onclick="switchNavTab('foods')">🥟 台灣美食大百科</button>
-      <button id="nav-btn-daily" class="nav-tab-btn" onclick="switchNavTab('daily')">🍳 三餐生活會話</button>
-    </div>
-  </div>
-
-  <div class="container">
-
-    <!-- 1. 語音對照 (截圖同款，預設完全呈現) -->
-    <section id="sec-phonetics" class="tab-section active">
-      <div class="phonetic-wrapper">
-        <div class="phonetic-header-tag">GUÍA FONÉTICA DE CONTRASTE (注音 ⇄ 拼音)</div>
-        <div class="phonetic-header-title">
-          <span>Domina los Sonidos con Referencias en Español</span>
-          <div class="letter-badge-a">A</div>
-        </div>
-        <div class="phonetic-header-desc">
-          Aprende por qué el Pinyin no se lee como español y cómo el Zhuyin (Bopomofo) te ayuda a no confundir los sonidos con expulsión de aire (aspirados).
-        </div>
-
-        <!-- 四聲調卡片 -->
-        <div class="tones-grid">
-          <div class="tone-card tone-red">
-            <div class="tone-card-top">
-              <span class="tone-card-tag">1° Tono Alto ˉ</span>
-              <button class="speaker-btn" onclick="speakText('媽')">🔊</button>
-            </div>
-            <div class="tone-card-sound">mā (ㄇㄚ)</div>
-            <div class="tone-card-desc">Voz alta y plana. Como cantar la nota 'Do' sostenida.</div>
-          </div>
-
-          <div class="tone-card tone-yellow">
-            <div class="tone-card-top">
-              <span class="tone-card-tag">2° Ascendente ˊ</span>
-              <button class="speaker-btn" onclick="speakText('麻')">🔊</button>
-            </div>
-            <div class="tone-card-sound">má (ㄇㄚˊ)</div>
-            <div class="tone-card-desc">Como cuando en español preguntas sorprendido: "¿¿Qué??".</div>
-          </div>
-
-          <div class="tone-card tone-green">
-            <div class="tone-card-top">
-              <span class="tone-card-tag">3° Ondulado ˇ</span>
-              <button class="speaker-btn" onclick="speakText('馬')">🔊</button>
-            </div>
-            <div class="tone-card-sound">mǎ (ㄇㄚˇ)</div>
-            <div class="tone-card-desc">Baja al grave y sube un poco: como un dubitativo "Bweee-no".</div>
-          </div>
-
-          <div class="tone-card tone-blue">
-            <div class="tone-card-top">
-              <span class="tone-card-tag">4° Tajante ˋ</span>
-              <button class="speaker-btn" onclick="speakText('罵')">🔊</button>
-            </div>
-            <div class="to
+      <button id="nav-btn-daily" class="nav-tab-btn" onclick="switchNavTab('daily')">🍳 三餐與夜市會話</button>
+      <button id="nav-btn-traffic" class="nav-tab-btn" onclick="switchNavTab('traffic')">🚦 交通與乘車規則</button>
+      <button id="nav-btn-flashcards" class="nav-tab-btn" onclick="switchNavTab('flas
