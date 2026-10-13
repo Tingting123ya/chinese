@@ -2,172 +2,119 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>¡Hola Chino! 台灣生活與交通完全指南</title>
+  <title>¡Hola Chino! 🇹🇼 台灣美食文化與語音學習大百科</title>
   <style>
     :root {
-      --bg: #0b1120;
-      --card-bg: #1e293b;
-      --card-sub: #0f172a;
+      --bg: #090d16;
+      --card-bg: #151d30;
+      --card-sub: #1e293b;
       --accent: #10b981;
-      --accent-hover: #059669;
-      --bubble-tourist: #2563eb;
-      --bubble-local: #334155;
+      --duo-green: #58cc02;
+      --duo-yellow: #ffc800;
+      --duo-red: #ff4b4b;
+      --duo-blue: #1cb0f6;
       --text-main: #f8fafc;
       --text-sub: #94a3b8;
       --zhuyin: #f59e0b;
       --pinyin: #38bdf8;
+      --border: #334155;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background-color: var(--bg); color: var(--text-main); padding-bottom: 80px; }
-    header { background-color: rgba(30, 41, 59, 0.95); backdrop-filter: blur(8px); padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; position: sticky; top: 0; z-index: 100; }
-    h1 { font-size: 1.2rem; font-weight: 800; color: var(--accent); display: flex; align-items: center; gap: 8px; }
-    .btn-group { display: flex; gap: 8px; }
-    .toggle-btn { background: #334155; color: #fff; border: 1px solid #475569; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; transition: 0.2s; font-weight: 600; }
-    .toggle-btn.active { background: var(--accent); border-color: var(--accent); color: #000; }
+    body { background-color: var(--bg); color: var(--text-main); padding-bottom: 90px; }
 
-    .container { max-width: 860px; margin: 0 auto; padding: 16px; display: flex; flex-direction: column; gap: 20px; }
+    header { background-color: rgba(21, 29, 48, 0.95); backdrop-filter: blur(12px); padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #334155; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+    .brand-box { display: flex; align-items: center; gap: 8px; font-size: 1.25rem; font-weight: 900; color: #facc15; text-shadow: 0 0 12px rgba(250, 204, 21, 0.4); }
+    .status-bar { display: flex; align-items: center; gap: 14px; }
+    .stat-chip { display: flex; align-items: center; gap: 5px; font-weight: 800; font-size: 0.95rem; }
+    .ctrl-group { display: flex; gap: 8px; }
+    .btn-toggle { background: #334155; color: #fff; border: 2px solid #475569; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; transition: 0.2s; font-weight: 800; }
+    .btn-toggle.active { background: #facc15; border-color: #eab308; color: #000; box-shadow: 0 0 10px rgba(234, 179, 8, 0.5); }
+
+    .nav-container { max-width: 980px; margin: 16px auto 0; padding: 0 16px; overflow-x: auto; }
+    .main-nav { display: flex; gap: 8px; border-bottom: 2px solid #334155; padding-bottom: 8px; }
+    .nav-tab-btn { background: #151d30; color: #94a3b8; border: 2px solid #334155; padding: 10px 18px; border-radius: 14px; font-size: 0.95rem; cursor: pointer; white-space: nowrap; font-weight: 800; transition: 0.2s; }
+    .nav-tab-btn.active { background: #3b82f6; color: #fff; border-color: #60a5fa; box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4); transform: translateY(-2px); }
+
+    .container { max-width: 980px; margin: 0 auto; padding: 16px; display: flex; flex-direction: column; gap: 24px; }
+    .card { background-color: var(--card-bg); border-radius: 22px; padding: 24px; border: 2px solid #334155; box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+    .card-title { font-size: 1.3rem; font-weight: 900; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; color: #f8fafc; }
     
-    /* 頂部主模組選單 */
-    .main-nav { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; }
-    .main-nav-btn { background: #1e293b; color: #94a3b8; border: 1px solid #334155; padding: 10px 16px; border-radius: 12px; font-size: 0.95rem; cursor: pointer; white-space: nowrap; font-weight: 700; transition: 0.2s; }
-    .main-nav-btn.active { background: var(--accent); color: #000; border-color: var(--accent); }
-
-    .card { background-color: var(--card-bg); border-radius: 18px; padding: 22px; border: 1px solid #334155; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
-    .card-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; color: #f8fafc; }
-
-    /* 次級標籤選單 */
     .sub-tabs { display: flex; gap: 8px; margin-bottom: 16px; overflow-x: auto; padding-bottom: 4px; }
-    .sub-btn { background: #334155; color: #cbd5e1; border: none; padding: 8px 14px; border-radius: 8px; font-size: 0.88rem; cursor: pointer; white-space: nowrap; font-weight: 600; }
-    .sub-btn.active { background: #3b82f6; color: #fff; }
+    .sub-btn { background: #1e293b; color: #cbd5e1; border: 2px solid #334155; padding: 8px 16px; border-radius: 10px; font-size: 0.9rem; cursor: pointer; white-space: nowrap; font-weight: 700; transition: 0.15s; }
+    .sub-btn.active { background: #10b981; color: #000; border-color: #059669; font-weight: 900; }
 
-    /* 萬用語句生成器 */
-    .builder-box { background: var(--card-sub); padding: 18px; border-radius: 14px; border: 1px solid #1e293b; text-align: center; margin-bottom: 16px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
-    .display-zh { font-size: 1.45rem; font-weight: 800; color: #fff; letter-spacing: 0.5px; }
-    .display-pho { font-size: 0.95rem; line-height: 1.4; }
-    .pho-py { color: var(--pinyin); margin-right: 8px; font-weight: 500; }
-    .pho-zy { color: var(--zhuyin); }
-    .display-es { font-size: 0.9rem; color: var(--text-sub); font-style: italic; }
-    .audio-btn { background: #334155; border: none; cursor: pointer; font-size: 1rem; padding: 6px 12px; border-radius: 20px; color: #fff; transition: 0.2s; margin-left: 6px; }
-    .audio-btn:hover { background: var(--accent); color: #000; }
+    .pho-py { color: var(--pinyin); margin-right: 8px; font-weight: 700; }
+    .pho-zy { color: var(--zhuyin); font-weight: 700; }
+    .audio-btn { background: #1e293b; border: 2px solid #475569; cursor: pointer; font-size: 1rem; padding: 4px 10px; border-radius: 14px; color: #fff; transition: 0.2s; vertical-align: middle; margin-left: 6px; }
+    .audio-btn:hover { background: #3b82f6; border-color: #60a5fa; }
 
-    .chip-block { margin-bottom: 12px; }
-    .chip-label { font-size: 0.85rem; color: #94a3b8; font-weight: 600; margin-bottom: 8px; display: block; }
-    .chip-container { display: flex; flex-wrap: wrap; gap: 8px; }
-    .chip { background: #334155; border: 1px solid #475569; padding: 7px 13px; border-radius: 20px; font-size: 0.88rem; cursor: pointer; color: #e2e8f0; transition: 0.15s; }
-    .chip.selected { background: #3b82f6; border-color: #60a5fa; color: #fff; font-weight: bold; }
+    /* 語音對照圖鑑白底高質感面板樣式 */
+    .phonetic-wrapper { background: #ffffff; border-radius: 22px; padding: 26px; color: #1e293b; box-shadow: 0 10px 30px rgba(0,0,0,0.35); }
+    .phonetic-header-tag { font-size: 0.78rem; font-weight: 800; color: #9333ea; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 6px; }
+    .phonetic-header-title { font-size: 1.55rem; font-weight: 900; color: #0f172a; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
+    .phonetic-header-desc { font-size: 0.9rem; color: #64748b; line-height: 1.45; margin-bottom: 22px; }
+    .letter-badge-a { background: #ef4444; color: #ffffff; font-weight: 900; width: 34px; height: 34px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+
+    .tones-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; margin-bottom: 24px; }
+    .tone-card { border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; justify-content: space-between; gap: 8px; border: 1.5px solid transparent; }
+    .tone-card-top { display: flex; justify-content: space-between; align-items: center; }
+    .tone-card-tag { font-size: 0.8rem; font-weight: 800; }
+    .tone-card-sound { font-size: 1.15rem; font-weight: 900; }
+    .tone-card-desc { font-size: 0.8rem; line-height: 1.35; color: #475569; }
+
+    .tone-red { background: #fff1f2; border-color: #fecdd3; color: #e11d48; }
+    .tone-yellow { background: #fefce8; border-color: #fef08a; color: #ca8a04; }
+    .tone-green { background: #f0fdf4; border-color: #bbf7d0; color: #16a34a; }
+    .tone-blue { background: #eff6ff; border-color: #bfdbfe; color: #2563eb; }
+
+    .speaker-tone-btn { background: transparent; border: none; font-size: 1.15rem; cursor: pointer; color: inherit; padding: 2px 4px; border-radius: 6px; }
+    .speaker-tone-btn:hover { background: rgba(0,0,0,0.06); }
+
+    .phonetic-pills { display: flex; gap: 10px; margin-bottom: 22px; }
+    .pill-btn { border: none; padding: 10px 22px; border-radius: 30px; font-size: 0.95rem; font-weight: 800; cursor: pointer; transition: 0.2s; }
+    .pill-btn.active { background: #22c55e; color: #ffffff; box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4); }
+    .pill-btn.inactive { background: #f1f5f9; color: #334155; }
+    .pill-btn.inactive:hover { background: #e2e8f0; }
+
+    .phonetic-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+    .p-card { background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.03); }
+    .p-card-top { display: flex; justify-content: space-between; align-items: center; }
+    .p-symbols { display: flex; align-items: baseline; gap: 10px; }
+    .p-zy-char { font-size: 1.6rem; font-weight: 900; color: #22c55e; }
+    .p-py-char { font-size: 1.3rem; font-weight: 900; color: #0f172a; }
+    .p-action-group { display: flex; align-items: center; gap: 8px; }
+    .p-word-pill { background: #f1f5f9; border: 1px solid #cbd5e1; padding: 3px 10px; border-radius: 12px; font-weight: 800; font-size: 0.95rem; color: #334155; }
+    .p-speaker-btn { background: #22c55e; border: none; width: 30px; height: 30px; border-radius: 50%; color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; }
+    .p-speaker-btn:hover { background: #16a34a; }
+    .p-truco-box { background: #f8fafc; border-radius: 10px; padding: 8px 12px; font-size: 0.8rem; color: #475569; border: 1px solid #f1f5f9; line-height: 1.35; }
+    .p-truco-tag { font-weight: 800; color: #16a34a; margin-right: 4px; }
+
+    /* 美食大百科卡片樣式 */
+    .food-card-modern { background: var(--card-sub); border: 2px solid #334155; border-radius: 18px; padding: 18px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 14px; }
+    .food-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .food-title-group { display: flex; align-items: center; gap: 12px; }
+    .food-avatar { width: 56px; height: 56px; border-radius: 14px; background: #0f172a; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; border: 2px solid #475569; flex-shrink: 0; }
+    .food-title { font-size: 1.5rem; font-weight: 900; color: #f8fafc; }
+    .food-en-es { font-size: 0.95rem; color: #f59e0b; font-weight: 700; }
+    .components-box { background: rgba(15, 23, 42, 0.7); border-radius: 14px; padding: 14px; border: 1px dashed #475569; }
+    .comp-title { font-size: 0.82rem; font-weight: 800; color: #38bdf8; text-transform: uppercase; margin-bottom: 8px; }
+    .comp-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+    .comp-chip { background: #1e293b; border: 1px solid #475569; border-radius: 10px; padding: 6px 12px; font-size: 0.85rem; display: flex; align-items: center; gap: 6px; }
 
     /* 對話氣泡 */
-    .chat-container { display: flex; flex-direction: column; gap: 12px; }
-    .chat-bubble { max-width: 88%; padding: 12px 16px; border-radius: 16px; line-height: 1.45; }
-    .chat-bubble.tourist { align-self: flex-start; background: var(--bubble-tourist); border-bottom-left-radius: 4px; }
-    .chat-bubble.local { align-self: flex-end; background: var(--bubble-local); border-bottom-right-radius: 4px; }
-    .speaker-name { font-size: 0.75rem; color: #94a3b8; margin-bottom: 4px; font-weight: 600; }
-    .bubble-text { font-size: 1.05rem; font-weight: 600; color: #fff; }
-    .bubble-pho { font-size: 0.82rem; margin-top: 4px; }
-    .bubble-es { font-size: 0.82rem; color: #cbd5e1; margin-top: 4px; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 4px; font-style: italic; }
+    .chat-container { display: flex; flex-direction: column; gap: 14px; }
+    .chat-bubble { max-width: 88%; padding: 14px 18px; border-radius: 20px; line-height: 1.5; border: 2px solid transparent; }
+    .chat-bubble.tourist { align-self: flex-start; background: #2563eb; border-color: #60a5fa; border-bottom-left-radius: 4px; }
+    .chat-bubble.local { align-self: flex-end; background: #334155; border-color: #64748b; border-bottom-right-radius: 4px; }
+    .speaker-name { font-size: 0.78rem; color: #cbd5e1; margin-bottom: 4px; font-weight: 700; }
+    .bubble-text { font-size: 1.15rem; font-weight: 700; color: #fff; }
+    .bubble-pho { font-size: 0.85rem; margin-top: 5px; }
+    .bubble-es { font-size: 0.85rem; color: #cbd5e1; margin-top: 6px; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 6px; font-style: italic; }
 
-    /* 單字標籤網格 */
-    .word-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 10px; margin-bottom: 16px; }
-    .word-chip { background: var(--card-sub); border: 1px solid #334155; border-radius: 12px; padding: 10px 12px; display: flex; flex-direction: column; gap: 4px; }
-    .word-header { display: flex; justify-content: space-between; align-items: center; }
-    .word-zh { font-size: 1.1rem; font-weight: 700; color: #fff; }
-
-    /* 美食卡片網格 */
-    .food-grid { display: flex; flex-direction: column; gap: 18px; }
-    .food-card { background: var(--card-sub); border: 1px solid #334155; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; }
-    @media (min-width: 640px) { .food-card { flex-direction: row; } }
-    .food-img-wrapper { position: relative; width: 100%; height: 200px; overflow: hidden; background: #1e293b; flex-shrink: 0; }
-    @media (min-width: 640px) { .food-img-wrapper { width: 240px; height: auto; } }
-    .food-img { width: 100%; height: 100%; object-fit: cover; }
-    .food-content { padding: 16px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; gap: 10px; }
-
-    .food-example { background: rgba(30, 41, 59, 0.7); border-left: 3px solid var(--accent); padding: 10px 14px; border-radius: 0 8px 8px 0; margin-top: 8px; }
-    .food-example-title { font-size: 0.75rem; color: var(--accent); font-weight: 700; text-transform: uppercase; margin-bottom: 2px; }
-
-    /* 地名網格 */
-    .loc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 10px; }
-    .loc-card { background: var(--card-sub); padding: 12px 14px; border-radius: 12px; border: 1px solid #334155; cursor: pointer; transition: 0.2s; }
-    .loc-card:hover { border-color: var(--pinyin); background: #1a2436; }
-
-    /* 文法解說方塊 */
-    .grammar-box { background: var(--card-sub); border-left: 4px solid var(--accent); padding: 12px 14px; border-radius: 0 10px 10px 0; margin-bottom: 10px; }
-
-    /* 小撇步 */
-    .tip-item { display: flex; gap: 12px; margin-bottom: 12px; background: var(--card-sub); padding: 14px; border-radius: 12px; }
-    .tip-icon { font-size: 1.5rem; }
-
-    /* 隱藏區塊 */
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
-  </style>
-</head>
-<body>
-
-  <header>
-    <h1>¡Hola Chino! 🇹🇼</h1>
-    <div class="btn-group">
-      <button id="toggleChar" class="toggle-btn" onclick="toggleCharMode()">繁體</button>
-      <button id="toggleSpeed" class="toggle-btn" onclick="toggleSpeedMode()">🐢 0.6x</button>
-    </div>
-  </header>
-
-  <div class="container">
-    
-    <!-- 主導覽分頁 -->
-    <div class="main-nav">
-      <button class="main-nav-btn active" onclick="switchMainTab('order')">🧋 點餐買東西</button>
-      <button class="main-nav-btn" onclick="switchMainTab('food_place')">🗺️ 地名與小吃圖鑑</button>
-      <button class="main-nav-btn" onclick="switchMainTab('traffic')">🚦 交通規則與路況</button>
-      <button class="main-nav-btn" onclick="switchMainTab('challenge')">✍️ 造句挑戰</button>
-      <button class="main-nav-btn" onclick="switchMainTab('tips')">💡 生活免尷尬撇步</button>
-    </div>
-
-    <!-- 模組 1：點餐買東西實戰 -->
-    <div id="tab-order" class="tab-content active">
-      <div class="card">
-        <div class="card-title">🧩 邏輯句型填空 (Constructor de Frases)</div>
-        <div class="sub-tabs">
-          <button class="sub-btn active" onclick="switchOrderSc('boba')">🧋 飲料店模式</button>
-          <button class="sub-btn" onclick="switchOrderSc('restaurant')">🍛 小吃店模式</button>
-        </div>
-
-        <div class="builder-box">
-          <div class="display-zh" id="orderResZh">---</div>
-          <div class="display-pho">
-            <span class="pho-py" id="orderResPy">---</span>
-            <span class="pho-zy" id="orderResZy">---</span>
-            <button class="audio-btn" onclick="speakText(document.getElementById('orderResZh').innerText)">🔊</button>
-          </div>
-          <div class="display-es" id="orderResEs">---</div>
-        </div>
-
-        <div class="chip-block">
-          <span class="chip-label">選擇句型 (Elige el patrón)：</span>
-          <div class="chip-container" id="orderPatChips"></div>
-        </div>
-        <div class="chip-block">
-          <span class="chip-label">填入符合邏輯的單字 (Elige el vocabulario)：</span>
-          <div class="chip-container" id="orderItemChips"></div>
-        </div>
-      </div>
-
-      <div class="card" style="margin-top: 20px;">
-        <div class="card-title">💬 點餐實戰對話 (Diálogos de Compra)</div>
-        <div class="sub-tabs">
-          <button class="sub-btn active" onclick="loadOrderDialog(0)">🧋 1. 手搖飲店 (標準應對)</button>
-          <button class="sub-btn" onclick="loadOrderDialog(1)">🍛 2. 小吃店 / 牛肉麵 (招牌與結帳)</button>
-        </div>
-        <div class="chat-container" id="orderChatBox"></div>
-      </div>
-    </div>
-
-    <!-- 模組 2：台灣地名與五大小吃圖鑑 -->
-    <div id="tab-food_place" class="tab-content">
-      <div class="card">
-        <div class="card-title">🗺️ 實戰問路覓食 (Preguntar por comida y lugares)</div>
-        <p style="font-size: 0.88rem; color: #94a3b8; margin-bottom: 12px;">點選下方想去的地名與小吃，立刻生成自然道地的旅遊問句：</p>
-        <div class="builder-box">
-          <div class="display-zh" id="askZh">不好意思，請問西門町有賣滷肉飯嗎？</div>
-          <div class="display-pho">
-            <span class="pho-py" id="askPy">Bù hǎoy
+    /* 3D 抽認卡 */
+    .flashcard-wrap { perspective: 1000px; max-width: 500px; margin: 0 auto; height: 290px; }
+    .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); transform-style: preserve-3d; cursor: pointer; }
+    .flashcard-inner.flipped { transform: rotateY(180deg); }
+    .fc-front, .fc-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 24px; padding: 24px; display: flex; flex-direction: colum
