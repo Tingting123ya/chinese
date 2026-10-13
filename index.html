@@ -2,134 +2,886 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="referrer" content="no-referrer">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>¡Hola Chino! 🇹🇼 台灣生活語音與文化大百科</title>
+  <title>¡Hola Chino! 3.0 - Chino Real para Hispanohablantes</title>
   <style>
     :root {
-      --bg: #090d16;
-      --card-bg: #151d30;
-      --card-sub: #1e293b;
-      --accent: #22c55e;
-      --text-main: #f8fafc;
-      --text-sub: #94a3b8;
-      --border: #334155;
-      --pinyin: #38bdf8;
-      --zhuyin: #f59e0b;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --duo-green: #22c55e;
+      --duo-darkgreen: #15803d;
+      --duo-yellow: #facc15;
+      --duo-red: #ef4444;
+      --duo-blue: #3b82f6;
+      --text-main: #1e293b;
+      --text-sub: #64748b;
+      --pinyin: #0284c7;
+      --zhuyin: #d97706;
+      --border: #e2e8f0;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     body { background-color: var(--bg); color: var(--text-main); padding-bottom: 90px; }
 
     /* 頂部狀態列 */
-    header { background-color: rgba(21, 29, 48, 0.95); backdrop-filter: blur(12px); padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border); position: sticky; top: 0; z-index: 100; }
-    .brand-box { font-size: 1.25rem; font-weight: 900; color: #facc15; }
-    .ctrl-group { display: flex; gap: 8px; }
-    .btn-toggle { background: #334155; color: #fff; border: 2px solid #475569; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; font-weight: 800; }
-    .btn-toggle.active { background: #facc15; color: #000; border-color: #eab308; }
+    header { background-color: #ffffff; border-bottom: 2px solid var(--border); padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.03); }
+    .brand-group { display: flex; align-items: center; gap: 10px; }
+    .brand-logo { width: 40px; height: 40px; background: #22c55e; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+    .brand-title { font-size: 1.25rem; font-weight: 900; color: #0f172a; display: flex; align-items: center; gap: 6px; }
+    .brand-sub { font-size: 0.75rem; color: var(--text-sub); }
 
-    /* 導覽列 */
-    .nav-container { max-width: 980px; margin: 16px auto 0; padding: 0 16px; overflow-x: auto; }
-    .main-nav { display: flex; gap: 8px; border-bottom: 2px solid var(--border); padding-bottom: 8px; }
-    .nav-tab-btn { background: #151d30; color: #94a3b8; border: 2px solid var(--border); padding: 10px 18px; border-radius: 14px; font-size: 0.95rem; cursor: pointer; white-space: nowrap; font-weight: 800; }
-    .nav-tab-btn.active { background: #3b82f6; color: #fff; border-color: #60a5fa; }
+    .header-stats { display: flex; align-items: center; gap: 14px; }
+    .stat-badge { display: flex; align-items: center; gap: 4px; font-weight: 800; font-size: 0.95rem; }
+    .ctrl-badge { background: #f1f5f9; border: 1.5px solid #cbd5e1; padding: 5px 12px; border-radius: 20px; font-size: 0.82rem; font-weight: 800; cursor: pointer; }
+    .ctrl-badge.active { background: #22c55e; color: #fff; border-color: #16a34a; }
 
-    .container { max-width: 980px; margin: 0 auto; padding: 16px; display: flex; flex-direction: column; gap: 24px; }
-    .card { background-color: var(--card-bg); border-radius: 22px; padding: 24px; border: 2px solid var(--border); }
-    .card-title { font-size: 1.3rem; font-weight: 900; margin-bottom: 16px; color: #f8fafc; }
+    /* 水平分頁導覽列 */
+    .nav-wrap { max-width: 1080px; margin: 0 auto; padding: 12px 16px 0; overflow-x: auto; }
+    .top-nav { display: flex; gap: 8px; border-bottom: 2px solid var(--border); padding-bottom: 6px; }
+    .nav-btn { background: transparent; border: none; padding: 10px 16px; font-size: 0.95rem; font-weight: 800; color: #64748b; cursor: pointer; white-space: nowrap; border-radius: 12px; transition: 0.15s; display: flex; align-items: center; gap: 6px; }
+    .nav-btn.active { background: #dcfce7; color: #15803d; }
 
-    .sub-tabs { display: flex; gap: 8px; margin-bottom: 16px; overflow-x: auto; padding-bottom: 4px; }
-    .sub-btn { background: #1e293b; color: #cbd5e1; border: 2px solid #334155; padding: 8px 16px; border-radius: 10px; font-size: 0.9rem; cursor: pointer; white-space: nowrap; font-weight: 700; }
-    .sub-btn.active { background: #10b981; color: #000; border-color: #059669; font-weight: 900; }
+    .container { max-width: 1080px; margin: 0 auto; padding: 16px; display: flex; flex-direction: column; gap: 20px; }
 
-    .pho-py { color: var(--pinyin); margin-right: 8px; font-weight: 700; }
-    .pho-zy { color: var(--zhuyin); font-weight: 700; }
-    .audio-btn { background: #1e293b; border: 2px solid #475569; cursor: pointer; font-size: 1rem; padding: 4px 10px; border-radius: 14px; color: #fff; vertical-align: middle; margin-left: 6px; }
-    .audio-btn:hover { background: #3b82f6; border-color: #60a5fa; }
+    /* 綠色大橫幅 Banner */
+    .hero-banner { background: linear-gradient(135deg, #15803d, #16a34a); border-radius: 20px; padding: 24px; color: #ffffff; position: relative; box-shadow: 0 4px 15px rgba(22, 163, 74, 0.2); }
+    .hero-tag { display: inline-block; background: rgba(255,255,255,0.2); font-size: 0.75rem; font-weight: 800; padding: 4px 10px; border-radius: 12px; margin-bottom: 8px; text-transform: uppercase; }
+    .hero-title { font-size: 1.6rem; font-weight: 900; margin-bottom: 6px; }
+    .hero-desc { font-size: 0.92rem; opacity: 0.95; line-height: 1.45; }
+    .hero-lightning { position: absolute; right: 24px; top: 24px; font-size: 2.5rem; opacity: 0.3; }
 
-    /* ================= 截圖專屬白色語音卡片樣式 ================= */
-    .phonetic-wrapper { background: #ffffff; border-radius: 22px; padding: 24px; color: #1e293b; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-    .phonetic-header-tag { font-size: 0.8rem; font-weight: 800; color: #9333ea; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 4px; }
-    .phonetic-header-title { font-size: 1.55rem; font-weight: 900; color: #0f172a; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
-    .phonetic-header-desc { font-size: 0.9rem; color: #64748b; line-height: 1.45; margin-bottom: 20px; }
-    .letter-badge-a { background: #ef4444; color: #ffffff; font-weight: 900; width: 34px; height: 34px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+    /* 分類藥丸標籤 (Pills) */
+    .filter-pills { display: flex; gap: 8px; overflow-x: auto; padding: 4px 0 10px; }
+    .pill { background: #ffffff; border: 1.5px solid var(--border); padding: 8px 16px; border-radius: 30px; font-size: 0.85rem; font-weight: 800; color: #475569; cursor: pointer; white-space: nowrap; transition: 0.15s; }
+    .pill.active { background: #22c55e; color: #ffffff; border-color: #16a34a; }
 
-    .tones-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; margin-bottom: 22px; }
-    .tone-card { border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; border: 1.5px solid transparent; }
-    .tone-card-top { display: flex; justify-content: space-between; align-items: center; }
-    .tone-card-tag { font-size: 0.8rem; font-weight: 800; }
-    .tone-card-sound { font-size: 1.15rem; font-weight: 900; }
-    .tone-card-desc { font-size: 0.8rem; line-height: 1.35; color: #475569; }
+    .search-box { background: #ffffff; border: 2px solid var(--border); border-radius: 14px; padding: 10px 16px; display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .search-input { border: none; outline: none; width: 100%; font-size: 0.95rem; color: #1e293b; }
 
-    .tone-red { background: #fff1f2; border-color: #fecdd3; color: #e11d48; }
-    .tone-yellow { background: #fefce8; border-color: #fef08a; color: #ca8a04; }
-    .tone-green { background: #f0fdf4; border-color: #bbf7d0; color: #16a34a; }
-    .tone-blue { background: #eff6ff; border-color: #bfdbfe; color: #2563eb; }
-    .speaker-btn { background: transparent; border: none; font-size: 1.15rem; cursor: pointer; color: inherit; }
+    /* 卡片通用樣式 */
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 16px; }
+    .quote-card { background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 18px; padding: 18px; display: flex; flex-direction: column; justify-content: space-between; gap: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); transition: transform 0.15s; }
+    .quote-card:hover { transform: translateY(-2px); border-color: #22c55e; }
+    .card-top { display: flex; justify-content: space-between; align-items: flex-start; }
+    .card-zh { font-size: 1.25rem; font-weight: 900; color: #0f172a; line-height: 1.35; }
+    .card-py { font-size: 0.88rem; color: var(--pinyin); font-weight: 700; }
+    .card-zy { font-size: 0.82rem; color: var(--zhuyin); font-weight: 700; margin-top: 2px; }
+    .card-es { font-size: 0.85rem; color: #475569; border-top: 1px solid #f1f5f9; padding-top: 6px; font-style: italic; }
+    .card-tip { font-size: 0.78rem; color: #94a3b8; display: flex; align-items: center; gap: 4px; }
+    .speaker-btn { background: #f0fdf4; border: 1px solid #bbf7d0; color: #16a34a; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; }
 
-    .phonetic-pills { display: flex; gap: 10px; margin-bottom: 20px; }
-    .pill-btn { border: none; padding: 10px 22px; border-radius: 30px; font-size: 0.95rem; font-weight: 800; cursor: pointer; }
-    .pill-btn.active { background: #22c55e; color: #ffffff; }
-    .pill-btn.inactive { background: #f1f5f9; color: #334155; }
+    /* 景點圖卡專用樣式 */
+    .place-card { background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+    .place-hero { background: #1e293b; color: #fff; padding: 20px 16px; display: flex; justify-content: space-between; align-items: center; }
+    .place-body { padding: 16px; display: flex; flex-direction: column; gap: 6px; }
 
-    .phonetic-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
-    .p-card { background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.03); }
-    .p-card-top { display: flex; justify-content: space-between; align-items: center; }
-    .p-card-symbols { display: flex; align-items: baseline; gap: 10px; }
-    .p-card-zy { font-size: 1.6rem; font-weight: 900; color: #22c55e; }
-    .p-card-py { font-size: 1.4rem; font-weight: 900; color: #0f172a; }
-    .p-card-action { display: flex; align-items: center; gap: 8px; }
-    .p-card-hanzi { background: #f1f5f9; color: #475569; font-size: 0.95rem; font-weight: 800; padding: 4px 10px; border-radius: 10px; }
-    .p-card-speaker { background: #22c55e; color: #ffffff; border: none; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; }
-    .p-card-truco { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 8px 12px; font-size: 0.78rem; color: #475569; line-height: 1.35; }
-    .p-card-truco b { color: #16a34a; }
+    /* 四聲調卡片 */
+    .tones-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin-bottom: 20px; }
+    .tone-card { border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; }
+    .tone-red { background: #fff1f2; border: 1.5px solid #fecdd3; color: #e11d48; }
+    .tone-yellow { background: #fefce8; border: 1.5px solid #fef08a; color: #ca8a04; }
+    .tone-green { background: #f0fdf4; border: 1.5px solid #bbf7d0; color: #16a34a; }
+    .tone-blue { background: #eff6ff; border: 1.5px solid #bfdbfe; color: #2563eb; }
 
-    /* 單字卡網格 */
-    .vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
-    .vocab-card { background: var(--card-sub); border: 2px solid var(--border); border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; }
-    .vocab-top { display: flex; justify-content: space-between; align-items: center; }
-    .vocab-zh { font-size: 1.15rem; font-weight: 800; color: #fff; }
+    /* 句型構造器樣式 */
+    .builder-box { background: #ffffff; border: 2px solid #e2e8f0; padding: 20px; border-radius: 18px; text-align: center; margin-bottom: 16px; }
+    .display-zh { font-size: 1.5rem; font-weight: 900; color: #0f172a; }
+    .chip-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+    .chip { background: #f1f5f9; border: 1.5px solid #cbd5e1; padding: 8px 14px; border-radius: 20px; font-size: 0.88rem; cursor: pointer; font-weight: 700; }
+    .chip.selected { background: #22c55e; color: #fff; border-color: #16a34a; }
 
-    /* 美食卡片與對話 */
-    .food-card-modern { background: var(--card-sub); border: 2px solid var(--border); border-radius: 18px; padding: 18px; margin-bottom: 18px; display: flex; flex-direction: column; gap: 12px; }
-    .food-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
-    .food-avatar { width: 52px; height: 52px; border-radius: 14px; background: #0f172a; display: flex; align-items: center; justify-content: center; font-size: 2rem; border: 2px solid #475569; }
-    .food-title { font-size: 1.45rem; font-weight: 900; color: #f8fafc; }
-    .comp-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-    .comp-chip { background: #0f172a; border: 1px solid #475569; border-radius: 10px; padding: 6px 12px; font-size: 0.82rem; }
-
+    /* 對話氣泡 */
     .chat-container { display: flex; flex-direction: column; gap: 14px; }
-    .chat-bubble { max-width: 88%; padding: 14px 18px; border-radius: 20px; line-height: 1.5; }
-    .chat-bubble.tourist { align-self: flex-start; background: #2563eb; border-bottom-left-radius: 4px; }
-    .chat-bubble.local { align-self: flex-end; background: #334155; border-bottom-right-radius: 4px; }
+    .chat-bubble { max-width: 86%; padding: 14px 18px; border-radius: 20px; line-height: 1.5; }
+    .chat-bubble.tourist { align-self: flex-start; background: #eff6ff; border: 1.5px solid #bfdbfe; color: #1e3a5f; border-bottom-left-radius: 4px; }
+    .chat-bubble.local { align-self: flex-end; background: #f0fdf4; border: 1.5px solid #bbf7d0; color: #14532d; border-bottom-right-radius: 4px; }
 
     /* 3D 抽認卡 */
-    .flashcard-wrap { perspective: 1000px; max-width: 480px; margin: 0 auto; height: 280px; }
+    .flashcard-wrap { perspective: 1000px; max-width: 480px; margin: 0 auto; height: 260px; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); transform-style: preserve-3d; cursor: pointer; }
     .flashcard-inner.flipped { transform: rotateY(180deg); }
-    .fc-front, .fc-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 24px; padding: 24px; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 3px solid #475569; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-    .fc-front { background: linear-gradient(145deg, #1e293b, #0f172a); }
-    .fc-back { background: linear-gradient(145deg, #1e3a5f, #0f2744); transform: rotateY(180deg); text-align: center; }
+    .fc-front, .fc-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 20px; padding: 22px; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 2px solid #cbd5e1; box-shadow: 0 6px 20px rgba(0,0,0,0.06); }
+    .fc-front { background: #ffffff; }
+    .fc-back { background: #1e293b; color: #ffffff; transform: rotateY(180deg); text-align: center; }
 
-    /* 分頁顯示切換 */
     .tab-section { display: none; }
     .tab-section.active { display: block !important; }
   </style>
 </head>
 <body>
 
+  <!-- 頂部狀態列 -->
   <header>
-    <div class="brand-box">¡Hola Chino! 🇹🇼 台灣學習大百科</div>
-    <div class="ctrl-group">
-      <button id="toggleChar" class="btn-toggle" onclick="toggleCharMode()">繁體</button>
-      <button id="toggleSpeed" class="btn-toggle" onclick="toggleSpeedMode()">🐢 0.6x</button>
+    <div class="brand-group">
+      <div class="brand-logo">🐼</div>
+      <div>
+        <div class="brand-title">¡Hola Chino! <span style="font-size:0.7rem; background:#fee2e2; color:#ef4444; padding:2px 6px; border-radius:10px;">3.0 萬用句</span></div>
+        <div class="brand-sub">Chino Real para Hispanohablantes (注音 + 拼音)</div>
+      </div>
+    </div>
+    <div class="header-stats">
+      <div class="stat-badge" style="color:#f97316;">🔥 <span>7</span></div>
+      <div class="stat-badge" style="color:#ef4444;">❤️ <span>5</span></div>
+      <div class="stat-badge" style="color:#3b82f6;">💎 <span>380</span></div>
+      <button id="toggleSpeed" class="ctrl-badge" onclick="toggleSpeedMode()">🐢 1.0x</button>
+      <button id="toggleChar" class="ctrl-badge active" onclick="toggleCharMode()">🇹🇼 繁體 (TC)</button>
     </div>
   </header>
 
-  <div class="nav-container">
-    <div class="main-nav">
-      <button id="nav-btn-phonetics" class="nav-tab-btn active" onclick="switchNavTab('phonetics')">🔤 語音對照 (截圖同款)</button>
-      <button id="nav-btn-vocab" class="nav-tab-btn" onclick="switchNavTab('vocab')">🏷️ 生活實用單字庫</button>
-      <button id="nav-btn-foods" class="nav-tab-btn" onclick="switchNavTab('foods')">🥟 台灣美食大百科</button>
-      <button id="nav-btn-daily" class="nav-tab-btn" onclick="switchNavTab('daily')">🍳 三餐與夜市會話</button>
-      <button id="nav-btn-traffic" class="nav-tab-btn" onclick="switchNavTab('traffic')">🚦 交通與乘車規則</button>
-      <button id="nav-btn-flashcards" class="nav-tab-btn" onclick="switchNavTab('flas
+  <!-- 頂部水平分頁導覽列 (加入旅遊景點分頁) -->
+  <div class="nav-wrap">
+    <div class="top-nav">
+      <button id="nav-btn-universal" class="nav-btn active" onclick="switchMainTab('universal')">⚡ 萬用句典 (Frases Comodín)</button>
+      <button id="nav-btn-places" class="nav-btn" onclick="switchMainTab('places')">🗺️ 旅遊景點 (Lugares & Viajes)</button>
+      <button id="nav-btn-dialog" class="nav-btn" onclick="switchMainTab('dialog')">🍱 6 Diálogos Reales (情境對話)</button>
+      <button id="nav-btn-builder" class="nav-btn" onclick="switchMainTab('builder')">🗣️ Entrenador Oral (句型填空)</button>
+      <button id="nav-btn-foods" class="nav-btn" onclick="switchMainTab('foods')">🥟 Vocabulario Diario (夜市與美食)</button>
+      <button id="nav-btn-flashcards" class="nav-btn" onclick="switchMainTab('flashcards')">🎴 3D 抽認卡 (Flashcards)</button>
+      <button id="nav-btn-phonetics" class="nav-btn" onclick="switchMainTab('phonetics')">🔤 注音對照 (Guía Fonética)</button>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- 1. 萬用句典 (Frases Comodín) -->
+    <section id="sec-universal" class="tab-section active">
+      <div class="hero-banner">
+        <span class="hero-tag">¡EL SALVADOR DE LOS VIAJEROS! CN TW</span>
+        <div class="hero-title">萬用句典：Frases Comodín para Cualquier Situación</div>
+        <div class="hero-desc">Con estas oraciones maestras puedes pedir ayuda, salvarte si no entiendes, pedir comida a tu gusto y pagar sin estrés. Toca cualquier tarjeta para escucharla.</div>
+        <div class="hero-lightning">⚡</div>
+      </div>
+
+      <div class="filter-pills">
+        <button class="pill active" onclick="filterUniversal('all')">🌟 Todas (全部)</button>
+        <button class="pill" onclick="filterUniversal('help')">🆘 萬能求助 (Ayuda)</button>
+        <button class="pill" onclick="filterUniversal('buy')">💳 買東西與結帳 (Compras)</button>
+        <button class="pill" onclick="filterUniversal('eat')">🍜 吃吃喝喝 (Comida)</button>
+        <button class="pill" onclick="filterUniversal('polite')">💛 社交禮貌 (Cortesía)</button>
+        <button class="pill" onclick="filterUniversal('traffic')">🗺️ 迷路出行 (En la Calle)</button>
+      </div>
+
+      <div class="search-box">
+        <span>🔍</span>
+        <input type="text" id="searchInput" class="search-input" placeholder="Buscar frase en español o chino (ej. 'despacio', 'cilantro', 'cuenta', '借')..." oninput="searchPhrases()">
+      </div>
+
+      <div class="cards-grid" id="universalCardsGrid"></div>
+    </section>
+
+    <!-- 2. 旅遊景點與問路覓食互動器 (恢復並擴充) -->
+    <section id="sec-places" class="tab-section">
+      <div class="hero-banner" style="background: linear-gradient(135deg, #0284c7, #0ea5e9);">
+        <span class="hero-tag">EXPLORAR TAIWÁN</span>
+        <div class="hero-title">台灣必去景點與問路覓食</div>
+        <div class="hero-desc">Combina los destinos más famosos de Taiwán con su comida callejera local para crear preguntas naturales de viaje.</div>
+        <div class="hero-lightning">🗺️</div>
+      </div>
+
+      <!-- 互動造句器：不好意思，請問 [地名] 有賣 [小吃] 嗎？ -->
+      <div class="builder-box">
+        <div style="font-size:0.85rem; font-weight:800; color:#0284c7; text-transform:uppercase; margin-bottom:4px;">💡 Patrón de Pregunta Turística / 旅遊實戰問句：</div>
+        <div class="display-zh" id="askPlaceZh">不好意思，請問西門町有賣滷肉飯嗎？</div>
+        <div style="margin:4px 0;">
+          <span class="pho-py" id="askPlacePy">Bù hǎoyìsi, qǐngwèn Xīméndīng yǒu mài lǔròufàn ma?</span>
+          <span class="pho-zy" id="askPlaceZy">ㄅㄨˋ ㄏㄠˇ ㄧˋ ˙ㄙ，ㄑㄧㄥˇ ㄨㄣˋ ㄒㄧ ㄇㄣˊ ㄉㄧㄥ ㄧㄡˇ ㄇㄞˋ ㄌㄨˇ ㄖㄡˋ ㄈㄢˋ ˙ㄇㄚ？</span>
+        </div>
+        <div style="font-size:0.9rem; color:#64748b; font-style:italic;" id="askPlaceEs">Disculpe, ¿en Ximending venden arroz con cerdo estofado?</div>
+        <button class="ctrl-badge active" style="margin-top:10px;" onclick="speakText(document.getElementById('askPlaceZh').innerText)">🔊 Escuchar Pronunciación</button>
+      </div>
+
+      <div style="font-size:0.85rem; font-weight:800; color:#475569;">📍 步驟 1：選擇旅遊地名 (Elige un lugar)</div>
+      <div class="chip-container" id="placeChips"></div>
+
+      <div style="font-size:0.85rem; font-weight:800; color:#475569; margin-top:10px;">🥢 步驟 2：選擇台灣小吃 (Elige una comida)</div>
+      <div class="chip-container" id="foodChips"></div>
+
+      <div style="font-size:1.15rem; font-weight:900; color:#0f172a; margin:24px 0 10px;">🏙️ 台灣 8 大代表旅遊勝地圖鑑 (Top 8 Destinos)</div>
+      <div class="cards-grid" id="placesGrid"></div>
+    </section>
+
+    <!-- 3. 6 大生活真實情境對話 -->
+    <section id="sec-dialog" class="tab-section">
+      <div class="hero-banner" style="background: linear-gradient(135deg, #d97706, #f59e0b);">
+        <span class="hero-tag">CONVERSACIONES COTIDIANAS</span>
+        <div class="hero-title">台灣在地 6 大生活情境真實會話</div>
+        <div class="hero-desc">Desde pedir boba tea hasta negociar en el mercado nocturno o tomar un taxi. Toca el audio para practicar.</div>
+        <div class="hero-lightning">🍱</div>
+      </div>
+
+      <div class="filter-pills">
+        <button class="pill active" onclick="loadDialogue(0)">🧋 1. 手搖飲店</button>
+        <button class="pill" onclick="loadDialogue(1)">🍜 2. 牛肉麵小吃店</button>
+        <button class="pill" onclick="loadDialogue(2)">🏪 3. 7-Eleven 超商</button>
+        <button class="pill" onclick="loadDialogue(3)">🚕 4. 搭計程車 (小黃)</button>
+        <button class="pill" onclick="loadDialogue(4)">🚶 5. 問路與找洗手間</button>
+        <button class="pill" onclick="loadDialogue(5)">🏮 6. 興南夜市漫步</button>
+      </div>
+      <div class="chat-container" id="dialogueChatBox"></div>
+    </section>
+
+    <!-- 4. 口語句型填空 (Entrenador Oral) -->
+    <section id="sec-builder" class="tab-section">
+      <div class="hero-banner" style="background: linear-gradient(135deg, #7c3aed, #9333ea);">
+        <span class="hero-tag">ENTRENADOR DE PATRONES</span>
+        <div class="hero-title">口語句型填空練習 (Entrenador Oral)</div>
+        <div class="hero-desc">Combina bloques lógicos para hablar con fluidez en restaurantes, cafeterías y transporte sin errores.</div>
+        <div class="hero-lightning">🗣️</div>
+      </div>
+
+      <div class="filter-pills">
+        <button class="pill active" onclick="switchBuilderSc('boba')">🧋 手搖飲模式</button>
+        <button class="pill" onclick="switchBuilderSc('restaurant')">🍜 小吃店模式</button>
+        <button class="pill" onclick="switchBuilderSc('transport')">🚕 交通問路模式</button>
+      </div>
+
+      <div class="builder-box">
+        <div class="display-zh" id="builderZh">---</div>
+        <div style="margin:4px 0;"><span class="pho-py" id="builderPy">---</span> <span class="pho-zy" id="builderZy">---</span></div>
+        <div style="font-size:0.9rem; color:#64748b; font-style:italic;" id="builderEs">---</div>
+        <button class="ctrl-badge active" style="margin-top:10px;" onclick="speakText(document.getElementById('builderZh').innerText)">🔊 Escuchar Oración</button>
+      </div>
+
+      <div style="font-size:0.85rem; font-weight:800; color:#475569; margin-bottom:4px;">步驟 1：選擇句型結構 (Elige el patrón)</div>
+      <div class="chip-container" id="patternChips"></div>
+
+      <div style="font-size:0.85rem; font-weight:800; color:#475569; margin:14px 0 4px;">步驟 2：填入相應單字 (Elige el vocabulario adecuado)</div>
+      <div class="chip-container" id="itemChips"></div>
+    </section>
+
+    <!-- 5. 夜市美食大百科 (食材拆解) -->
+    <section id="sec-foods" class="tab-section">
+      <div class="hero-banner" style="background: linear-gradient(135deg, #b91c1c, #dc2626);">
+        <span class="hero-tag">GASTRONOMÍA Y MERCADOS NOCTURNOS</span>
+        <div class="hero-title">台灣夜市與經典美食大百科</div>
+        <div class="hero-desc">Descubre qué lleva cada plato típico para ordenar exactamente lo que te gusta y evitar lo que no.</div>
+        <div class="hero-lightning">🥟</div>
+      </div>
+      <div class="cards-grid" id="foodsGrid"></div>
+    </section>
+
+    <!-- 6. 3D 抽認卡 (Flashcards) -->
+    <section id="sec-flashcards" class="tab-section">
+      <div class="hero-banner" style="background: linear-gradient(135deg, #0f766e, #0d9488);">
+        <span class="hero-tag">TARJETAS NEMOTÉCNICAS</span>
+        <div class="hero-title">3D 單字抽認卡與記憶點</div>
+        <div class="hero-desc">Toca la tarjeta para voltearla y descubrir trucos mentales de asociación para hispanohablantes.</div>
+        <div class="hero-lightning">🎴</div>
+      </div>
+
+      <div style="text-align: center; margin-top:10px;">
+        <div class="flashcard-wrap" onclick="flipCard()">
+          <div class="flashcard-inner" id="flashCardInner">
+            <div class="fc-front">
+              <span id="fcFrontEmoji" style="font-size:4rem; margin-bottom:8px;">🧋</span>
+              <span id="fcFrontZh" style="font-size:2.2rem; font-weight:900; color:#0f172a;">珍珠奶茶</span>
+              <div style="margin-top:8px;">
+                <span id="fcFrontPy" style="color:var(--pinyin); font-size:1.1rem; font-weight:700;">zhēnzhū nǎichá</span>
+                <span id="fcFrontZy" style="color:var(--zhuyin); font-size:1rem; font-weight:700;">ㄓㄣ ㄓㄨ ㄋㄞˇ ㄔㄚˊ</span>
+              </div>
+            </div>
+            <div class="fc-back">
+              <span id="fcBackEs" style="font-size:1.4rem; font-weight:800; color:#facc15;">Té con leche y perlas</span>
+              <div style="background:rgba(255,255,255,0.1); border-radius:12px; padding:12px; margin-top:12px; width:100%;">
+                <div style="font-size:0.75rem; color:#4ade80; font-weight:800;">💡 TRUCO DE MEMORIA / 記憶技巧:</div>
+                <p id="fcBackTip" style="font-size:0.85rem; color:#f1f5f9; margin-top:4px; line-height:1.4;"></p>
+              </div>
+              <button class="ctrl-badge active" style="margin-top:12px;" onclick="event.stopPropagation(); speakText(document.getElementById('fcFrontZh').innerText)">🔊 Escuchar</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:20px; display:flex; justify-content:center; align-items:center; gap:14px;">
+          <button class="ctrl-badge" onclick="prevCard()">⬅️ Anterior</button>
+          <span id="fcCounter" style="font-size:0.95rem; font-weight:800; color:#64748b;">1 / 8</span>
+          <button class="ctrl-badge active" onclick="nextCard()">Siguiente ➡️</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. 截圖同款注音對照表 (Guía Fonética de Contraste) -->
+    <section id="sec-phonetics" class="tab-section">
+      <div style="background:#ffffff; border-radius:20px; padding:24px; border:2px solid #e2e8f0;">
+        <div style="font-size:0.8rem; font-weight:800; color:#9333ea; letter-spacing:0.5px; text-transform:uppercase;">GUÍA FONÉTICA DE CONTRASTE (注音 ⇄ 拼音)</div>
+        <div style="font-size:1.55rem; font-weight:900; color:#0f172a; margin:6px 0 12px; display:flex; justify-content:space-between; align-items:center;">
+          <span>Domina los Sonidos con Referencias en Español</span>
+          <div style="background:#ef4444; color:#fff; font-weight:900; width:34px; height:34px; border-radius:6px; display:flex; align-items:center; justify-content:center;">A</div>
+        </div>
+        <p style="font-size:0.9rem; color:#64748b; margin-bottom:20px;">Aprende por qué el Pinyin no se lee como español y cómo el Zhuyin (Bopomofo) te ayuda a no confundir los sonidos con expulsión de aire (aspirados).</p>
+
+        <!-- 四聲調卡片 -->
+        <div class="tones-grid">
+          <div class="tone-card tone-red">
+            <div style="display:flex; justify-content:space-between;"><b>1° Tono Alto ˉ</b> <button class="speaker-btn" onclick="speakText('媽')">🔊</button></div>
+            <div style="font-size:1.15rem; font-weight:900;">mā (ㄇㄚ)</div>
+            <div style="font-size:0.8rem; line-height:1.35;">Voz alta y plana. Como cantar la nota 'Do' sostenida.</div>
+          </div>
+          <div class="tone-card tone-yellow">
+            <div style="display:flex; justify-content:space-between;"><b>2° Ascendente ˊ</b> <button class="speaker-btn" onclick="speakText('麻')">🔊</button></div>
+            <div style="font-size:1.15rem; font-weight:900;">má (ㄇㄚˊ)</div>
+            <div style="font-size:0.8rem; line-height:1.35;">Como cuando en español preguntas sorprendido: "¿¿Qué??".</div>
+          </div>
+          <div class="tone-card tone-green">
+            <div style="display:flex; justify-content:space-between;"><b>3° Ondulado ˇ</b> <button class="speaker-btn" onclick="speakText('馬')">🔊</button></div>
+            <div style="font-size:1.15rem; font-weight:900;">mǎ (ㄇㄚˇ)</div>
+            <div style="font-size:0.8rem; line-height:1.35;">Baja al grave y sube un poco: como un dubitativo "Bweee-no".</div>
+          </div>
+          <div class="tone-card tone-blue">
+            <div style="display:flex; justify-content:space-between;"><b>4° Tajante ˋ</b> <button class="speaker-btn" onclick="speakText('罵')">🔊</button></div>
+            <div style="font-size:1.15rem; font-weight:900;">mà (ㄇㄚˋ)</div>
+            <div style="font-size:0.8rem; line-height:1.35;">Caída seca y autoritaria de arriba a abajo: ¡NO! ¡YA!</div>
+          </div>
+        </div>
+
+        <div class="filter-pills" style="margin-bottom:18px;">
+          <button id="pillCons" class="pill active" onclick="switchPhoneticPill('cons')">Consonantes / Iniciales (聲母 21)</button>
+          <button id="pillVoc" class="pill" onclick="switchPhoneticPill('voc')">Vocales / Finales (韻母 16)</button>
+        </div>
+
+        <div class="cards-grid" id="phoneticCardsGrid"></div>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    let isTrad = true;
+    let isSlow = false;
+    let phoneticPill = 'cons';
+    let currentFilter = 'all';
+
+    function switchMainTab(tabKey) {
+      document.querySelectorAll('.tab-section').forEach(el => el.classList.remove('active'));
+      const sec = document.getElementById(`sec-${tabKey}`);
+      if (sec) sec.classList.add('active');
+
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.getElementById(`nav-btn-${tabKey}`);
+      if (activeBtn) activeBtn.classList.add('active');
+    }
+
+    /* ================= 1. 萬用句典資料庫 ================= */
+    const universalPhrases = [
+      {
+        cat: "help",
+        zh_t: "不好意思，聽不懂，可以說慢一點嗎？", zh_s: "不好意思，听不懂，可以说慢一点吗？",
+        py: "Bù hǎoyìsi, tīng bù dǒng, kěyǐ shuō màn yìdiǎn ma?",
+        zy: "ㄅㄨˋ ㄏㄠˇ ㄧˋ ˙ㄙ，ㄊㄧㄥ ㄅㄨˋ ㄉㄨㄥˇ，ㄎㄜˇ ㄧˇ ㄕㄨㄛ ㄇㄢˋ ㄧˋ ㄉㄧㄢˇ ˙ㄇㄚ？",
+        es: "Disculpe, no entiendo, ¿puede hablar más despacio?",
+        tip: "¡Tu frase de salvación #1! Si alguien te habla muy rápido, úsala sin miedo."
+      },
+      {
+        cat: "help",
+        zh_t: "請幫我寫下來好嗎？", zh_s: "请帮我写下来好吗？",
+        py: "Qǐng bāng wǒ xiě xiàlái hǎo ma?",
+        zy: "ㄑㄧㄥˇ ㄅㄤ ㄨㄛˇ ㄒㄧㄝˇ ㄒㄧㄚˋ ㄌㄞˊ ㄏㄠˇ ˙ㄇㄚ？",
+        es: "¿Me lo puedes escribir (en el móvil/papel), por favor?",
+        tip: "Perfecto para direcciones difíciles o nombres que prefieres leer en el traductor."
+      },
+      {
+        cat: "help",
+        zh_t: "對不起，我中文不太好。", zh_s: "对不起，我中文不太好。",
+        py: "Duìbùqǐ, wǒ zhōngwén bú tài hǎo.",
+        zy: "ㄉㄨㄟˋ ㄅㄨˋ ㄑㄧˇ，ㄨㄛˇ ㄓㄨㄥ ㄨㄣˊ ㄅㄨˊ ㄊㄞˋ ㄏㄠˇ。",
+        es: "Perdón, mi chino no es muy bueno.",
+        tip: "Rompe el hielo con humildad; los locales de inmediato serán muy amables."
+      },
+      {
+        cat: "help",
+        zh_t: "可以借我充電 / 行動電源嗎？", zh_s: "可以借我充电 / 移动电源吗？",
+        py: "Kěyǐ jiè wǒ chōngdiàn / xíngdòng diànyuán ma?",
+        zy: "ㄎㄜˇ ㄧˇ ㄐㄧㄝˋ ㄨㄛˇ ㄔㄨㄥ ㄉㄧㄢˋ / ㄒㄧㄥˊ ㄉㄨㄥˋ ㄉㄧㄢˋ ㄩㄢˊ ˙ㄇㄚ？",
+        es: "¿Me puedes prestar un cargador / powerbank?",
+        tip: "Para cuando te quedas sin batería en una cafetería o restaurante."
+      },
+      {
+        cat: "buy",
+        zh_t: "請問這個多少錢？", zh_s: "请问这个多少钱？",
+        py: "Qǐngwèn zhège duōshǎo qián?",
+        zy: "ㄑㄧㄥˇ ㄨㄣˋ ㄓㄜˋ ˙ㄍㄜ ㄉㄨㄛ ㄕㄠˇ ㄑㄧㄢˊ？",
+        es: "Disculpe, ¿cuánto cuesta esto?",
+        tip: "La frase comodín para saber el precio de cualquier producto."
+      },
+      {
+        cat: "buy",
+        zh_t: "可以刷卡嗎？還是只能付現？", zh_s: "可以刷卡吗？还是只能付现？",
+        py: "Kěyǐ shuākǎ ma? Háishì zhǐnéng fùxiàn?",
+        zy: "ㄎㄜˇ ㄧˇ ㄕㄨㄚ ㄎㄚˇ ˙ㄇㄚ？ㄏㄞˊ ㄕˋ ㄓˇ ㄋㄥˊ ㄈㄨˋ ㄒㄧㄢˋ？",
+        es: "¿Se puede pagar con tarjeta o solo en efectivo?",
+        tip: "En los mercados nocturnos casi todo se paga en efectivo (付現)."
+      },
+      {
+        cat: "eat",
+        zh_t: "不要香菜，謝謝！", zh_s: "不要香菜，谢谢！",
+        py: "Bú yào xiāngcài, xièxie!",
+        zy: "ㄅㄨˊ ㄧㄠˋ ㄒㄧㄤ ㄘㄞˋ，ㄒㄧㄝˋ ˙ㄒㄧㄝ！",
+        es: "¡Sin cilantro, por favor!",
+        tip: "La frase más útil de Taiwán si no te gusta el cilantro en fideos o sopa."
+      },
+      {
+        cat: "eat",
+        zh_t: "我要大杯、微糖微冰。", zh_s: "我要大杯、微糖微冰。",
+        py: "Wǒ yào dà bēi, wéitáng wéibīng.",
+        zy: "ㄨㄛˇ ㄧㄠˋ ㄉㄚˋ ㄅㄟ、ㄨㄟˊ ㄊㄤˊ ㄨㄟˊ ㄅㄧㄥ。",
+        es: "Quiero tamaño grande, poco azúcar (30%) y poco hielo.",
+        tip: "La fórmula de oro para pedir té con leche y boba como un local."
+      },
+      {
+        cat: "polite",
+        zh_t: "謝謝你，辛苦了！", zh_s: "谢谢你，辛苦了！",
+        py: "Xièxie nǐ, xīnkǔ le!",
+        zy: "ㄒㄧㄝˋ ˙ㄒㄧㄝ ㄋㄧˇ，ㄒㄧㄣ ㄎㄨˇ ˙ㄌㄜ！",
+        es: "¡Muchas gracias por su arduo trabajo!",
+        tip: "La forma más cálida de despedirse de taxistas, camareros y dependientes."
+      },
+      {
+        cat: "traffic",
+        zh_t: "請問洗手間 / 捷運站在哪裡？", zh_s: "请问洗手间 / 捷运站在哪里？",
+        py: "Qǐngwèn xǐshǒujiān / jiéyùnzhàn zài nǎlǐ?",
+        zy: "ㄑㄧㄥˇ ㄨㄣˋ ㄒㄧˇ ㄕㄡˇ ㄐㄧㄢ / ㄐㄧㄝˊ ㄩㄣˋ ㄓㄢˋ ㄗㄞˋ ㄋㄚˇ ㄌㄧˇ？",
+        es: "Disculpe, ¿dónde está el baño / la estación de metro?",
+        tip: "Para ubicar el metro o los baños públicos en la calle o estación."
+      }
+    ];
+
+    function filterUniversal(cat) {
+      currentFilter = cat;
+      document.querySelectorAll('#sec-universal .filter-pills .pill').forEach((btn, i) => {
+        btn.classList.toggle('active', ['all','help','buy','eat','polite','traffic'][i] === cat);
+      });
+      renderUniversal();
+    }
+
+    function searchPhrases() {
+      const q = document.getElementById('searchInput').value.toLowerCase();
+      renderUniversal(q);
+    }
+
+    function renderUniversal(filterText = '') {
+      const grid = document.getElementById('universalCardsGrid');
+      grid.innerHTML = '';
+      universalPhrases.forEach(item => {
+        if (currentFilter !== 'all' && item.cat !== currentFilter) return;
+        const zh = isTrad ? item.zh_t : item.zh_s;
+        if (filterText && !zh.toLowerCase().includes(filterText) && !item.es.toLowerCase().includes(filterText) && !item.py.toLowerCase().includes(filterText)) return;
+
+        const div = document.createElement('div');
+        div.className = 'quote-card';
+        div.innerHTML = `
+          <div class="card-top">
+            <div class="card-zh">${zh}</div>
+            <button class="speaker-btn" onclick="speakText('${zh}')">🔊</button>
+          </div>
+          <div>
+            <div class="card-py">${item.py}</div>
+            <div class="card-zy">${item.zy}</div>
+          </div>
+          <div class="card-es">${item.es}</div>
+          <div class="card-tip">💡 ${item.tip}</div>
+        `;
+        grid.appendChild(div);
+      });
+    }
+
+    /* ================= 2. 旅遊景點與問路覓食互動器 ================= */
+    const travelPlaces = [
+      { zh: "西門町", py: "Xīméndīng", zy: "ㄒㄧ ㄇㄣˊ ㄉㄧㄥ", es: "Ximending", desc: "El centro comercial y juvenil más famoso de Taipéi." },
+      { zh: "台北101", py: "Táiběi yī-líng-yī", zy: "ㄊㄞˊ ㄅㄟˇ ㄧ ㄌㄧㄥˊ ㄧ", es: "Taipéi 101", desc: "El emblemático rascacielos con mirador de la capital." },
+      { zh: "淡水老街", py: "Dànshuǐ lǎojiē", zy: "ㄉㄢˋ ㄕㄨㄟˇ ㄌㄠˇ ㄐㄧㄝ", es: "Calle Vieja de Tamsui", desc: "Famosa por su puesta de sol en la costa y comidas tradicionales." },
+      { zh: "九份", py: "Jiǔfèn", zy: "ㄐㄧㄡˇ ㄈㄣˋ", es: "Jiufen", desc: "Pueblo de montaña histórico repleto de farolillos rojos y casas de té." },
+      { zh: "花蓮夜市", py: "Huālián yèshì", zy: "ㄏㄨㄚ ㄌㄧㄢˊ ㄧㄝˋ ㄕˋ", es: "Mercado de Hualien", desc: "El mercado Dongdamen de la hermosa costa este." },
+      { zh: "逢甲夜市", py: "Féngjiǎ yèshì", zy: "ㄈㄥˊ ㄐㄧㄚˇ ㄧㄝˋ ㄕˋ", es: "Mercado Fengjia", desc: "El mercado nocturno más grande y variado de Taichung." },
+      { zh: "阿里山", py: "Ālǐshān", zy: "ㄚ ㄌㄧˇ ㄕㄢ", es: "Alishan", desc: "Bosque de cipreses sagrados, famoso por el té de alta montaña y el tren rojo." },
+      { zh: "台南古城", py: "Táinán", zy: "ㄊㄞˊ ㄋㄢˊ", es: "Tainan", desc: "La capital gastronómica e histórica más antigua de Taiwán." }
+    ];
+
+    const travelFoods = [
+      { zh: "滷肉飯", py: "lǔròufàn", zy: "ㄌㄨˇ ㄖㄡˋ ㄈㄢˋ", es: "arroz con cerdo estofado" },
+      { zh: "珍珠奶茶", py: "zhēnzhū nǎichá", zy: "ㄓㄣ ㄓㄨ ㄋㄞˇ ㄔㄚˊ", es: "té con perlas (boba)" },
+      { zh: "大雞排", py: "dà jīpái", zy: "ㄉㄚˋ ㄐㄧ ㄆㄞˊ", es: "pollo frito gigante" },
+      { zh: "臭豆腐", py: "chòu dòufu", zy: "ㄔㄡˋ ㄉㄡˋ ˙ㄈㄨ", es: "tofu apestoso" },
+      { zh: "蚵仔煎", py: "ézǐjiān", zy: "ㄜˊ ㄗˇ ㄐㄧㄢ", es: "tortilla de ostras" },
+      { zh: "芒果冰", py: "mángguǒbīng", zy: "ㄇㄤˊ ㄍㄨㄛˇ ㄅㄧㄥ", es: "hielo raspado con mango" }
+    ];
+
+    let selPlaceIdx = 0;
+    let selFoodIdx = 0;
+
+    function renderPlaceSelectors() {
+      const pC = document.getElementById('placeChips');
+      const fC = document.getElementById('foodChips');
+      pC.innerHTML = ''; fC.innerHTML = '';
+
+      travelPlaces.forEach((p, idx) => {
+        const btn = document.createElement('button');
+        btn.className = `chip ${idx === selPlaceIdx ? 'selected' : ''}`;
+        btn.innerText = p.zh;
+        btn.onclick = () => { selPlaceIdx = idx; renderPlaceSelectors(); updateAskPlaceSentence(); };
+        pC.appendChild(btn);
+      });
+
+      travelFoods.forEach((f, idx) => {
+        const btn = document.createElement('button');
+        btn.className = `chip ${idx === selFoodIdx ? 'selected' : ''}`;
+        btn.innerText = f.zh;
+        btn.onclick = () => { selFoodIdx = idx; renderPlaceSelectors(); updateAskPlaceSentence(); };
+        fC.appendChild(btn);
+      });
+    }
+
+    function updateAskPlaceSentence() {
+      const p = travelPlaces[selPlaceIdx];
+      const f = travelFoods[selFoodIdx];
+      document.getElementById('askPlaceZh').innerText = `不好意思，請問${p.zh}有賣${f.zh}嗎？`;
+      document.getElementById('askPlacePy').innerText = `Bù hǎoyìsi, qǐngwèn ${p.py} yǒu mài ${f.py} ma?`;
+      document.getElementById('askPlaceZy').innerText = `ㄅㄨˋ ㄏㄠˇ ㄧˋ ˙ㄙ，ㄑㄧㄥˇ ㄨㄣˋ ${p.zy} ㄧㄡˇ ㄇㄞˋ ${f.zy} ˙ㄇㄚ？`;
+      document.getElementById('askPlaceEs').innerText = `Disculpe, ¿en ${p.es} venden ${f.es}?`;
+    }
+
+    function renderPlacesGrid() {
+      const grid = document.getElementById('placesGrid');
+      grid.innerHTML = '';
+      travelPlaces.forEach(p => {
+        const div = document.createElement('div');
+        div.className = 'place-card';
+        div.innerHTML = `
+          <div class="place-hero">
+            <div>
+              <div style="font-size:1.3rem; font-weight:900;">${p.zh}</div>
+              <div style="font-size:0.85rem; color:#38bdf8;">${p.py}</div>
+            </div>
+            <button class="speaker-btn" onclick="speakText('${p.zh}')">🔊</button>
+          </div>
+          <div class="place-body">
+            <div style="font-weight:800; color:#0284c7;">${p.es}</div>
+            <div style="font-size:0.85rem; color:#64748b; line-height:1.4;">${p.desc}</div>
+          </div>
+        `;
+        grid.appendChild(div);
+      });
+    }
+
+    /* ================= 3. 6 大真實生活情境會話 ================= */
+    const dialoguesList = [
+      {
+        name: "手搖飲店",
+        lines: [
+          { role: "tourist", name: "你 (Tú)", zh: "不好意思，我想點一杯珍珠奶茶。", py: "Bù hǎoyìsi, wǒ xiǎng diǎn yì bēi zhēnzhū nǎichá.", es: "Disculpe, quisiera pedir un té con leche y perlas." },
+          { role: "local", name: "店員", zh: "好的！甜度冰塊呢？大杯還中杯？", py: "Hǎode! Tiándù bīngkuài ne? Dà bēi hái zhōng bēi?", es: "¡Muy bien! ¿Azúcar y hielo? ¿Grande o mediano?" },
+          { role: "tourist", name: "你 (Tú)", zh: "我要大杯、微糖微冰，然後需要一個袋子。", py: "Wǒ yào dà bēi, wéitáng wéibīng, ránhòu xūyào yí gè dàizi.", es: "Grande, 30% azúcar y poco hielo, y necesito una bolsita." }
+        ]
+      },
+      {
+        name: "牛肉麵店",
+        lines: [
+          { role: "tourist", name: "你 (Tú)", zh: "請問你們最推薦的招牌是什麼？會辣嗎？", py: "Qǐngwèn nǐmen zuì tuījiàn de zhāopái shì shénme? Huì là ma?", es: "¿Cuál es la especialidad recomendada? ¿Pica?" },
+          { role: "local", name: "店員", zh: "牛肉麵跟滷味很多人點！小辣很香喔。", py: "Niúròumiàn gēn lǔwèi hěnduō rén diǎn! Xiǎolà hěn xiāng ō.", es: "¡Fideos de ternera y guisados! Picante suave está muy rico." }
+        ]
+      },
+      {
+        name: "7-Eleven 超商",
+        lines: [
+          { role: "tourist", name: "你 (Tú)", zh: "你好，微波便當可以幫我加熱嗎？我用悠遊卡結帳。", py: "Nǐhǎo, wéibō biàndāng kěyǐ bāng wǒ jiārè ma? Wǒ yòng yōuyóukǎ jiézhàng.", es: "Hola, ¿me calienta el bento en el microondas? Pago con EasyCard." },
+          { role: "local", name: "店員", zh: "沒問題！請問要筷子還是湯匙？發票要印出來嗎？", py: "Méi wèntí! Qǐngwèn yào kuàizi háishì tāngchí? Fāpiào yào yìn chūlái ma?", es: "¡Sin problema! ¿Palillos o cuchara? ¿Imprimo el ticket?" }
+        ]
+      },
+      {
+        name: "搭計程車",
+        lines: [
+          { role: "tourist", name: "你 (Tú)", zh: "司機大哥，我要去台北車站，請問大概要多久？", py: "Sījī dàgē, wǒ yào qù Táiběi Chēzhàn, qǐngwèn dàgài yào duōjiǔ?", es: "Conductor, voy a la Estación de Taipéi, ¿cuánto tardaremos?" },
+          { role: "local", name: "司機", zh: "走高架橋大約十二分鐘！請在右邊便利商店靠邊停。", py: "Zǒu gāojiàqiáo dàyuē shí'èr fēnzhōng!...", es: "¡Unos doce minutos por la autopista elevada!" }
+        ]
+      },
+      {
+        name: "路上問路",
+        lines: [
+          { role: "tourist", name: "你 (Tú)", zh: "不好意思，請問最近的捷運站在哪裡？走路會很遠嗎？", py: "Bù hǎoyìsi, qǐngwèn zuìjìn de jiéyùnzhàn zài nǎlǐ? Zǒulù huì hěn yuǎn ma?", es: "Disculpe, ¿dónde está la estación de metro más cercana? ¿Está lejos a pie?" },
+          { role: "local", name: "路人", zh: "很近！前面路口右轉走三分鐘就到了！", py: "Hěn jìn! Qiánmiàn lùkǒu yòuzhuǎn zǒu sān fēnzhōng jiù dào le!", es: "¡Muy cerca! Gire a la derecha en la esquina y camine 3 minutos." }
+        ]
+      },
+      {
+        name: "興南夜市漫步",
+        lines: [
+          { role: "tourist", name: "你 (Tú)", zh: "這裡小吃超多！今天我請客，你想吃什麼就盡情大吃吧！", py: "Zhèlǐ xiǎochī chāoduō! Jīntiān wǒ qǐngkè, nǐ xiǎng chī shénme jiù jìnqíng dà chī ba!", es: "¡Cuánta comida! ¡Hoy invito yo (I'm treating), come todo lo que quieras!" },
+          { role: "local", name: "朋友", zh: "太棒了！我想吃大腸包小腸、鹹酥雞，再去打彈珠套圈圈！", py: "Tài bàng le! Wǒ xiǎng chī dàcháng bāo xiǎocháng, xiánsūjī...", es: "¡Genial! ¡Quiero salchicha con arroz, pollo frito y luego jugar canicas!" }
+        ]
+      }
+    ];
+
+    function loadDialogue(idx) {
+      document.querySelectorAll('#sec-dialog .filter-pills .pill').forEach((btn, i) => btn.classList.toggle('active', i === idx));
+      const box = document.getElementById('dialogueChatBox');
+      box.innerHTML = '';
+      dialoguesList[idx].lines.forEach(l => {
+        const div = document.createElement('div');
+        div.className = `chat-bubble ${l.role}`;
+        div.innerHTML = `
+          <div style="font-size:0.75rem; color:#64748b; margin-bottom:4px; font-weight:800;">${l.name}</div>
+          <div style="font-size:1.05rem; font-weight:800;">${l.zh} <button class="speaker-btn" style="width:26px; height:26px; font-size:0.8rem; display:inline-flex;" onclick="speakText('${l.zh}')">🔊</button></div>
+          <div style="font-size:0.8rem; color:var(--pinyin); margin-top:2px;">${l.py}</div>
+          <div style="font-size:0.8rem; color:#64748b; margin-top:4px;">${l.es}</div>
+        `;
+        box.appendChild(div);
+      });
+    }
+
+    /* ================= 4. 口語句型構造器 ================= */
+    const builderData = {
+      boba: {
+        patterns: [
+          { zh: "我要一杯 [___]。", py: "Wǒ yào yì bēi [___].", zy: "ㄨㄛˇ ㄧㄠˋ ㄧˋ ㄅㄟ [___]。", es: "Quiero un vaso de [___]." },
+          { zh: "我要大杯、[___]。", py: "Wǒ yào dà bēi, [___].", zy: "ㄨㄛˇ ㄧㄠˋ ㄉㄚˋ ㄅㄟ, [___]。", es: "Quiero tamaño grande, [___]." }
+        ],
+        items: [
+          { zh: "珍珠奶茶", py: "zhēnzhū nǎichá", zy: "ㄓㄣ ㄓㄨ ㄋㄞˇ ㄔㄚˊ", es: "té con leche y perlas" },
+          { zh: "微糖微冰", py: "wéitáng wéibīng", zy: "ㄨㄟˊ ㄊㄤˊ ㄨㄟˊ ㄅㄧㄥ", es: "30% azúcar y poco hielo" },
+          { zh: "無糖去冰", py: "wútáng qùbīng", zy: "ㄨˊ ㄊㄤˊ ㄑㄩˋ ㄅㄧㄥ", es: "sin azúcar y sin hielo" }
+        ]
+      },
+      restaurant: {
+        patterns: [
+          { zh: "請問這個會 [___] 嗎？", py: "Qǐngwèn zhège huì [___] ma?", zy: "ㄑㄧㄥˇ ㄨㄣˋ ㄓㄜˋ ˙ㄍㄜ ㄏㄨㄟˋ [___] ˙ㄇㄚ？", es: "¿Esto es [___]?" },
+          { zh: "請問你們只能 [___] 嗎？", py: "Qǐngwèn nǐmen zhǐnéng [___] ma?", zy: "ㄑㄧㄥˇ ㄨㄣˋ ㄋㄧˇ ˙ㄇㄣ ㄓˇ ㄋㄥˊ [___] ˙ㄇㄚ？", es: "¿Solo se puede [___]?" }
+        ],
+        items: [
+          { zh: "辣", py: "là", zy: "ㄌㄚˋ", es: "picante" },
+          { zh: "付現", py: "fùxiàn", zy: "ㄈㄨˋ ㄒㄧㄢˋ", es: "pagar en efectivo" },
+          { zh: "刷卡", py: "shuākǎ", zy: "ㄕㄨㄚ ㄎㄚˇ", es: "pagar con tarjeta" }
+        ]
+      },
+      transport: {
+        patterns: [
+          { zh: "請問到 [___] 大概多久？", py: "Qǐngwèn dào [___] dàgài duōjiǔ?", zy: "ㄑㄧㄥˇ ㄨㄣˋ ㄉㄠˋ [___] ㄉㄚˋ ㄍㄞˋ ㄉㄨㄛ ㄐㄧㄡˇ？", es: "¿Cuánto se tarda a [___]?" }
+        ],
+        items: [
+          { zh: "台北車站", py: "Táiběi Chēzhàn", zy: "ㄊㄞˊ ㄅㄟˇ ㄔㄜ ㄓㄢˋ", es: "Estación de Taipéi" },
+          { zh: "花蓮夜市", py: "Huālián yèshì", zy: "ㄏㄨㄚ ㄌㄧㄢˊ ㄧㄝˋ ㄕˋ", es: "Mercado de Hualien" }
+        ]
+      }
+    };
+    let curBSc = 'boba';
+    let selPat = 0;
+    let selIt = 0;
+
+    function switchBuilderSc(key) {
+      curBSc = key;
+      selPat = 0; selIt = 0;
+      document.querySelectorAll('#sec-builder .filter-pills .pill').forEach((b, i) => b.classList.toggle('active', ['boba','restaurant','transport'][i] === key));
+      renderBuilderChips();
+      updateBuilderSentence();
+    }
+
+    function renderBuilderChips() {
+      const pC = document.getElementById('patternChips');
+      const iC = document.getElementById('itemChips');
+      pC.innerHTML = ''; iC.innerHTML = '';
+
+      builderData[curBSc].patterns.forEach((p, idx) => {
+        const btn = document.createElement('button');
+        btn.className = `chip ${idx === selPat ? 'selected' : ''}`;
+        btn.innerText = p.zh;
+        btn.onclick = () => { selPat = idx; renderBuilderChips(); updateBuilderSentence(); };
+        pC.appendChild(btn);
+      });
+
+      builderData[curBSc].items.forEach((it, idx) => {
+        const btn = document.createElement('button');
+        btn.className = `chip ${idx === selIt ? 'selected' : ''}`;
+        btn.innerText = it.zh;
+        btn.onclick = () => { selIt = idx; renderBuilderChips(); updateBuilderSentence(); };
+        iC.appendChild(btn);
+      });
+    }
+
+    function updateBuilderSentence() {
+      const p = builderData[curBSc].patterns[selPat];
+      const it = builderData[curBSc].items[selIt];
+      document.getElementById('builderZh').innerText = p.zh.replace('[___]', it.zh);
+      document.getElementById('builderPy').innerText = p.py.replace('[___]', it.py);
+      document.getElementById('builderZy').innerText = p.zy.replace('[___]', it.zy);
+      document.getElementById('builderEs').innerText = p.es.replace('[___]', it.es);
+    }
+
+    /* ================= 5. 美食大百科 ================= */
+    const foodsList = [
+      { emoji: "🍗", zh: "鹹酥雞", py: "xiánsūjī", zy: "ㄒㄧㄢˊ ㄙㄨ ㄐㄧ", es: "Pollo frito sal y pimienta con albahaca", comps: ["炸雞塊 (pollo)", "九層塔 (albahaca)", "地瓜條 (patata dulce)"] },
+      { emoji: "🌭", zh: "大腸包小腸", py: "dàcháng bāo xiǎocháng", zy: "ㄉㄚˋ ㄔㄤˊ ㄅㄠ ㄒㄧㄠˇ ㄔㄤˊ", es: "Salchicha en arroz glutinoso", comps: ["糯米腸 (arroz)", "黑豬肉香腸 (salchicha)", "生大蒜 (ajo)"] },
+      { emoji: "🥭", zh: "芒果冰", py: "mángguǒbīng", zy: "ㄇㄤˊ ㄍㄨㄛˇ ㄅㄧㄥ", es: "Hielo raspado con mango fresco", comps: ["新鮮芒果 (mango)", "細緻剉冰 (hielo)", "香甜煉乳 (leche condensada)"] },
+      { emoji: "🧋", zh: "珍珠奶茶", py: "zhēnzhū nǎichá", zy: "ㄓㄣ ㄓㄨ ㄋㄞˇ ㄔㄚˊ", es: "Té con leche y perlas", comps: ["黑糖波霸 (boba)", "阿薩姆紅茶 (té negro)", "鮮奶 (leche)"] },
+      { emoji: "🥪", zh: "棺材板", py: "guāncáibǎn", zy: "ㄍㄨㄢ ˙ㄘㄞ ㄅㄢˇ", es: "Pan tostado con crema de marisco", comps: ["炸厚吐司 (pan frito)", "海鮮濃湯 (crema)"] },
+      { emoji: "🥩", zh: "大雞排", py: "dà jīpái", zy: "ㄉㄚˋ ㄐㄧ ㄆㄞˊ", es: "Filete gigante de pollo", comps: ["帶骨雞胸 (pechuga)", "脆皮麵衣 (rebozado)"] },
+      { emoji: "🥟", zh: "小籠包", py: "xiǎolóngbāo", zy: "ㄒㄧㄠˇ ㄌㄨㄥˊ ㄅㄠ", es: "Empanadillas con caldo al vapor", comps: ["薄麵皮 (masa fina)", "豬肉高湯 (caldo caliente)"] },
+      { emoji: "🍜", zh: "大腸麵線", py: "dàcháng miànxiàn", zy: "ㄉㄚˋ ㄔㄤˊ ㄇㄧㄢˋ ㄒㄧㄢˋ", es: "Fideos finos con intestino", comps: ["紅麵線 (fideos)", "滷大腸 (intestino)", "烏醋 (vinagre)"] },
+      { emoji: "🍳", zh: "蛋餅", py: "dànbǐng", zy: "ㄉㄢˋ ㄅㄧㄥˇ", es: "Crepe taiwanesa con huevo", comps: ["蛋餅皮 (crepe)", "雞蛋 (huevo)", "起司/培根 (queso/bacon)"] },
+      { emoji: "🍚", zh: "滷肉飯", py: "lǔròufàn", zy: "ㄌㄨˇ ㄖㄡˋ ㄈㄢˋ", es: "Arroz con cerdo estofado", comps: ["手切五花肉 (cerdo)", "熱白飯 (arroz)", "滷蛋 (huevo)"] }
+    ];
+
+    function renderFoods() {
+      const grid = document.getElementById('foodsGrid');
+      grid.innerHTML = '';
+      foodsList.forEach(f => {
+        const div = document.createElement('div');
+        div.className = 'quote-card';
+        div.innerHTML = `
+          <div class="card-top">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="font-size:2rem;">${f.emoji}</span>
+              <div>
+                <div class="card-zh">${f.zh}</div>
+                <div class="card-py">${f.py} · <span class="card-zy">${f.zy}</span></div>
+              </div>
+            </div>
+            <button class="speaker-btn" onclick="speakText('${f.zh}')">🔊</button>
+          </div>
+          <div class="card-es">${f.es}</div>
+          <div style="font-size:0.78rem; color:#64748b; margin-top:4px;">
+            <b>🧩 配料：</b>${f.comps.join(' · ')}
+          </div>
+        `;
+        grid.appendChild(div);
+      });
+    }
+
+    /* ================= 6. 3D 抽認卡 ================= */
+    const flashcardsData = [
+      { emoji: "🧋", zh: "珍珠奶茶", py: "zhēnzhū nǎichá", zy: "ㄓㄣ ㄓㄨ ㄋㄞˇ ㄔㄚˊ", es: "Té con leche y perlas", tip: "'Zhēnzhū' = Perlas del mar. 'Nǎichá' = Té con leche." },
+      { emoji: "🍳", zh: "蛋餅", py: "dànbǐng", zy: "ㄉㄢˋ ㄅㄧㄥˇ", es: "Crepe con huevo", tip: "'Dàn' = Huevo, 'Bǐng' = Masa plana. Desayuno clásico." },
+      { emoji: "🍗", zh: "鹹酥雞", py: "xiánsūjī", zy: "ㄒㄧㄢˊ ㄙㄨ ㄐㄧ", es: "Pollo frito taiwanés", tip: "'Xián' = Salado, 'Sū' = Crujiente, 'Jī' = Pollo." },
+      { emoji: "🌭", zh: "大腸包小腸", py: "dàcháng bāo xiǎocháng", zy: "ㄉㄚˋ ㄔㄤˊ ㄅㄠ ㄒㄧㄠˇ ㄔㄤˊ", es: "Salchicha en arroz", tip: "El embutido de arroz envuelve a la salchicha." },
+      { emoji: "🥭", zh: "芒果冰", py: "mángguǒbīng", zy: "ㄇㄤˊ ㄍㄨㄛˇ ㄅㄧㄥ", es: "Hielo con mango", tip: "'Mángguǒ' suena a 'Mango', y 'Bīng' es hielo." },
+      { emoji: "💳", zh: "悠遊卡", py: "yōuyóukǎ", zy: "ㄧㄡ ㄧㄡˊ ㄎㄚˇ", es: "Tarjeta EasyCard", tip: "Para metro, bus y pagar en todas las tiendas 7-Eleven." },
+      { emoji: "🚫", zh: "禁止飲食", py: "jìnzhǐ yǐnshí", zy: "ㄐㄧㄣˋ ㄓˇ ㄧㄣˇ ㄕˊ", es: "Prohibido comer y beber", tip: "¡Regla estricta del metro! Tras la línea amarilla multa de 7500 NTD." }
+    ];
+    let curFcIdx = 0;
+    function flipCard() { document.getElementById('flashCardInner').classList.toggle('flipped'); }
+    function renderFlashcard() {
+      const item = flashcardsData[curFcIdx];
+      document.getElementById('flashCardInner').classList.remove('flipped');
+      document.getElementById('fcFrontEmoji').innerText = item.emoji;
+      document.getElementById('fcFrontZh').innerText = item.zh;
+      document.getElementById('fcFrontPy').innerText = item.py;
+      document.getElementById('fcFrontZy').innerText = item.zy;
+      document.getElementById('fcBackEs').innerText = item.es;
+      document.getElementById('fcBackTip').innerText = item.tip;
+      document.getElementById('fcCounter').innerText = `${curFcIdx + 1} / ${flashcardsData.length}`;
+    }
+    function nextCard() { curFcIdx = (curFcIdx + 1) % flashcardsData.length; renderFlashcard(); }
+    function prevCard() { curFcIdx = (curFcIdx - 1 + flashcardsData.length) % flashcardsData.length; renderFlashcard(); }
+
+    /* ================= 7. 截圖同款注音對照表 ================= */
+    const consonantsList = [
+      { zy: "ㄅ", py: "b", hanzi: "八", truco: "Como una 'p' suave en español (sin expulsar aire)." },
+      { zy: "ㄆ", py: "p", hanzi: "怕", truco: "'p' aspirada con un soplido fuerte de aire (mueve un papel)." },
+      { zy: "ㄇ", py: "m", hanzi: "媽", truco: "Igual a la 'm' de mamá en español." },
+      { zy: "ㄈ", py: "f", hanzi: "發", truco: "Igual a la 'f' en español." },
+      { zy: "ㄉ", py: "d", hanzi: "大", truco: "Como la 't' en español sin soltar aire." },
+      { zy: "ㄊ", py: "t", hanzi: "他", truco: "'t' aspirada con expulsión notable de aire." },
+      { zy: "ㄋ", py: "n", hanzi: "你", truco: "Igual a la 'n' en español." },
+      { zy: "ㄌ", py: "l", hanzi: "來", truco: "Igual a la 'l' en español." },
+      { zy: "ㄍ", py: "g", hanzi: "哥", truco: "Como una 'k' suave en español sin aire." },
+      { zy: "ㄎ", py: "k", hanzi: "看", truco: "'k' con soplido fuerte de aire." },
+      { zy: "ㄏ", py: "h", hanzi: "喝", truco: "Como la 'j' suave en español." },
+      { zy: "ㄐ", py: "j", hanzi: "家", truco: "Como 'ch' muy sonriente y suave." },
+      { zy: "ㄑ", py: "q", hanzi: "七", truco: "'ch' con sonrisa y fuerte salida de aire." },
+      { zy: "ㄒ", py: "x", hanzi: "西", truco: "Como la 's' estirando ampliamente las comisuras." },
+      { zy: "ㄓ", py: "zh", hanzi: "中", truco: "Dobla la punta de la lengua hacia atrás (retrofleja)." },
+      { zy: "ㄔ", py: "ch", hanzi: "吃", truco: "Lengua atrás expulsando fuerte corriente de aire." },
+      { zy: "ㄕ", py: "sh", hanzi: "是", truco: "Como 'sh' en inglés doblando la lengua hacia atrás." },
+      { zy: "ㄖ", py: "r", hanzi: "日", truco: "Sonido suave similar a la 'j' francesa o 'r' inglesa." },
+      { zy: "ㄗ", py: "z", hanzi: "字", truco: "Como 'ds' suave sin aire." },
+      { zy: "ㄘ", py: "c", hanzi: "次", truco: "Como 'ts' expulsando aire." },
+      { zy: "ㄙ", py: "s", hanzi: "四", truco: "Como la 's' normal del español." }
+    ];
+
+    const vocalsList = [
+      { zy: "ㄚ", py: "a", hanzi: "啊", truco: "Igual que la 'a' abierta en español." },
+      { zy: "ㄛ", py: "o", hanzi: "喔", truco: "Como una 'o' redonda." },
+      { zy: "ㄜ", py: "e", hanzi: "俄", truco: "Sonido gutural entre 'e' y 'o'." },
+      { zy: "ㄝ", py: "ie / e", hanzi: "也", truco: "Como 'ie' en español." },
+      { zy: "ㄞ", py: "ai", hanzi: "愛", truco: "Como 'ai' en 'aire'." },
+      { zy: "ㄟ", py: "ei", hanzi: "黑", truco: "Como 'ei' en 'reina'." },
+      { zy: "ㄠ", py: "ao", hanzi: "包", truco: "Como 'au' en 'auto'." },
+      { zy: "ㄡ", py: "ou", hanzi: "頭", truco: "Como 'ou' en 'euro'." },
+      { zy: "ㄢ", py: "an", hanzi: "安", truco: "Como 'an' en 'canto'." },
+      { zy: "ㄣ", py: "en", hanzi: "恩", truco: "Como 'en' suave." },
+      { zy: "ㄤ", py: "ang", hanzi: "昂", truco: "Sonido nasal posterior profundo." },
+      { zy: "ㄥ", py: "eng", hanzi: "風", truco: "Sonido nasal similar a 'eng'." },
+      { zy: "ㄦ", py: "er", hanzi: "二", truco: "Enrolla la lengua hacia atrás." },
+      { zy: "ㄧ", py: "i", hanzi: "一", truco: "Como la 'i' en español." },
+      { zy: "ㄨ", py: "u", hanzi: "五", truco: "Como la 'u' en español." },
+      { zy: "ㄩ", py: "ü", hanzi: "雨", truco: "Posición de labios de 'u' pero diciendo 'i'." }
+    ];
+
+    function switchPhoneticPill(pillKey) {
+      phoneticPill = pillKey;
+      document.getElementById('pillCons').classList.toggle('active', pillKey === 'cons');
+      document.getElementById('pillVoc').classList.toggle('active', pillKey === 'voc');
+      renderPhonetics();
+    }
+
+    function renderPhonetics() {
+      const grid = document.getElementById('phoneticCardsGrid');
+      grid.innerHTML = '';
+      const list = phoneticPill === 'cons' ? consonantsList : vocalsList;
+      list.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'quote-card';
+        div.innerHTML = `
+          <div class="card-top">
+            <div style="display:flex; align-items:baseline; gap:10px;">
+              <span style="font-size:1.6rem; font-weight:900; color:#22c55e;">${item.zy}</span>
+              <span style="font-size:1.4rem; font-weight:900; color:#0f172a;">${item.py}</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="background:#f1f5f9; color:#475569; font-size:0.95rem; font-weight:800; padding:4px 10px; border-radius:10px;">${item.hanzi}</span>
+              <button class="speaker-btn" onclick="speakText('${item.hanzi}')">🔊</button>
+            </div>
+          </div>
+          <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:8px 12px; font-size:0.78rem; color:#475569;">
+            <b style="color:#16a34a;">ES Truco:</b> ${item.truco}
+          </div>
+        `;
+        grid.appendChild(div);
+      });
+    }
+
+    /* ================= 語音播放與繁簡切換 ================= */
+    function speakText(txt) {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(txt);
+      u.lang = 'zh-TW';
+      u.rate = isSlow ? 0.6 : 1.0;
+      window.speechSynthesis.speak(u);
+    }
+
+    function toggleCharMode() {
+      isTrad = !isTrad;
+      document.getElementById('toggleChar').innerText = isTrad ? '🇹🇼 繁體 (TC)' : '🇨🇳 简体 (SC)';
+      renderUniversal();
+      updateAskPlaceSentence();
+      loadDialogue(0);
+      updateBuilderSentence();
+      renderFoods();
+      renderFlashcard();
+    }
+
+    function toggleSpeedMode() {
+      isSlow = !isSlow;
+      const b = document.getElementById('toggleSpeed');
+      b.innerText = isSlow ? '🐢 0.6x' : '🐇 1.0x';
+      b.classList.toggle('active', isSlow);
+    }
+
+    // 啟動載入
+    renderUniversal();
+    renderPlaceSelectors();
+    updateAskPlaceSentence();
+    renderPlacesGrid();
+    loadDialogue(0);
+    switchBuilderSc('boba');
+    renderFoods();
+    renderFlashcard();
+    renderPhonetics();
+  </script>
+</body>
+</html>
