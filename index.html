@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -22,34 +23,30 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     body { background-color: var(--bg); color: var(--text-main); padding-bottom: 90px; }
 
-    /* 頂部狀態列 */
     header { background-color: #ffffff; border-bottom: 2px solid var(--border); padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.03); }
     .brand-group { display: flex; align-items: center; gap: 10px; }
     .brand-logo { width: 40px; height: 40px; background: #22c55e; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
     .brand-title { font-size: 1.25rem; font-weight: 900; color: #0f172a; display: flex; align-items: center; gap: 6px; }
     .brand-sub { font-size: 0.75rem; color: var(--text-sub); }
 
-    .header-stats { display: flex; align-items: center; gap: 14px; }
+    .header-stats { display: flex; align-items: center; gap: 12px; }
     .stat-badge { display: flex; align-items: center; gap: 4px; font-weight: 800; font-size: 0.95rem; }
     .ctrl-badge { background: #f1f5f9; border: 1.5px solid #cbd5e1; padding: 5px 12px; border-radius: 20px; font-size: 0.82rem; font-weight: 800; cursor: pointer; }
     .ctrl-badge.active { background: #22c55e; color: #fff; border-color: #16a34a; }
 
-    /* 水平分頁導覽列 */
-    .nav-wrap { max-width: 1080px; margin: 0 auto; padding: 12px 16px 0; overflow-x: auto; }
+    .nav-wrap { max-width: 1100px; margin: 0 auto; padding: 12px 16px 0; overflow-x: auto; }
     .top-nav { display: flex; gap: 8px; border-bottom: 2px solid var(--border); padding-bottom: 6px; }
-    .nav-btn { background: transparent; border: none; padding: 10px 16px; font-size: 0.95rem; font-weight: 800; color: #64748b; cursor: pointer; white-space: nowrap; border-radius: 12px; transition: 0.15s; display: flex; align-items: center; gap: 6px; }
+    .nav-btn { background: transparent; border: none; padding: 10px 15px; font-size: 0.92rem; font-weight: 800; color: #64748b; cursor: pointer; white-space: nowrap; border-radius: 12px; transition: 0.15s; display: flex; align-items: center; gap: 6px; }
     .nav-btn.active { background: #dcfce7; color: #15803d; }
 
-    .container { max-width: 1080px; margin: 0 auto; padding: 16px; display: flex; flex-direction: column; gap: 20px; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 16px; display: flex; flex-direction: column; gap: 20px; }
 
-    /* 綠色大橫幅 Banner */
-    .hero-banner { background: linear-gradient(135deg, #15803d, #16a34a); border-radius: 20px; padding: 24px; color: #ffffff; position: relative; box-shadow: 0 4px 15px rgba(22, 163, 74, 0.2); }
-    .hero-tag { display: inline-block; background: rgba(255,255,255,0.2); font-size: 0.75rem; font-weight: 800; padding: 4px 10px; border-radius: 12px; margin-bottom: 8px; text-transform: uppercase; }
-    .hero-title { font-size: 1.6rem; font-weight: 900; margin-bottom: 6px; }
-    .hero-desc { font-size: 0.92rem; opacity: 0.95; line-height: 1.45; }
-    .hero-lightning { position: absolute; right: 24px; top: 24px; font-size: 2.5rem; opacity: 0.3; }
+    .hero-banner { background: linear-gradient(135deg, #15803d, #16a34a); border-radius: 20px; padding: 22px 24px; color: #ffffff; position: relative; box-shadow: 0 4px 15px rgba(22, 163, 74, 0.2); }
+    .hero-tag { display: inline-block; background: rgba(255,255,255,0.2); font-size: 0.75rem; font-weight: 800; padding: 4px 10px; border-radius: 12px; margin-bottom: 6px; text-transform: uppercase; }
+    .hero-title { font-size: 1.55rem; font-weight: 900; margin-bottom: 4px; }
+    .hero-desc { font-size: 0.9rem; opacity: 0.95; line-height: 1.45; }
+    .hero-lightning { position: absolute; right: 24px; top: 20px; font-size: 2.5rem; opacity: 0.3; }
 
-    /* 分類藥丸標籤 (Pills) */
     .filter-pills { display: flex; gap: 8px; overflow-x: auto; padding: 4px 0 10px; }
     .pill { background: #ffffff; border: 1.5px solid var(--border); padding: 8px 16px; border-radius: 30px; font-size: 0.85rem; font-weight: 800; color: #475569; cursor: pointer; white-space: nowrap; transition: 0.15s; }
     .pill.active { background: #22c55e; color: #ffffff; border-color: #16a34a; }
@@ -57,7 +54,6 @@
     .search-box { background: #ffffff; border: 2px solid var(--border); border-radius: 14px; padding: 10px 16px; display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
     .search-input { border: none; outline: none; width: 100%; font-size: 0.95rem; color: #1e293b; }
 
-    /* 卡片通用樣式 */
     .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 16px; }
     .quote-card { background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 18px; padding: 18px; display: flex; flex-direction: column; justify-content: space-between; gap: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); transition: transform 0.15s; }
     .quote-card:hover { transform: translateY(-2px); border-color: #22c55e; }
@@ -69,12 +65,17 @@
     .card-tip { font-size: 0.78rem; color: #94a3b8; display: flex; align-items: center; gap: 4px; }
     .speaker-btn { background: #f0fdf4; border: 1px solid #bbf7d0; color: #16a34a; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; }
 
-    /* 景點圖卡專用樣式 */
-    .place-card { background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
-    .place-hero { background: #1e293b; color: #fff; padding: 20px 16px; display: flex; justify-content: space-between; align-items: center; }
-    .place-body { padding: 16px; display: flex; flex-direction: column; gap: 6px; }
+    .builder-box { background: #ffffff; border: 2px solid #e2e8f0; padding: 20px; border-radius: 18px; text-align: center; margin-bottom: 16px; }
+    .display-zh { font-size: 1.5rem; font-weight: 900; color: #0f172a; }
+    .chip-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+    .chip { background: #f1f5f9; border: 1.5px solid #cbd5e1; padding: 8px 14px; border-radius: 20px; font-size: 0.88rem; cursor: pointer; font-weight: 700; }
+    .chip.selected { background: #22c55e; color: #fff; border-color: #16a34a; }
 
-    /* 四聲調卡片 */
+    .chat-container { display: flex; flex-direction: column; gap: 14px; }
+    .chat-bubble { max-width: 88%; padding: 14px 18px; border-radius: 20px; line-height: 1.5; }
+    .chat-bubble.tourist { align-self: flex-start; background: #eff6ff; border: 1.5px solid #bfdbfe; color: #1e3a5f; border-bottom-left-radius: 4px; }
+    .chat-bubble.local { align-self: flex-end; background: #f0fdf4; border: 1.5px solid #bbf7d0; color: #14532d; border-bottom-right-radius: 4px; }
+
     .tones-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin-bottom: 20px; }
     .tone-card { border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; }
     .tone-red { background: #fff1f2; border: 1.5px solid #fecdd3; color: #e11d48; }
@@ -82,20 +83,6 @@
     .tone-green { background: #f0fdf4; border: 1.5px solid #bbf7d0; color: #16a34a; }
     .tone-blue { background: #eff6ff; border: 1.5px solid #bfdbfe; color: #2563eb; }
 
-    /* 句型構造器樣式 */
-    .builder-box { background: #ffffff; border: 2px solid #e2e8f0; padding: 20px; border-radius: 18px; text-align: center; margin-bottom: 16px; }
-    .display-zh { font-size: 1.5rem; font-weight: 900; color: #0f172a; }
-    .chip-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-    .chip { background: #f1f5f9; border: 1.5px solid #cbd5e1; padding: 8px 14px; border-radius: 20px; font-size: 0.88rem; cursor: pointer; font-weight: 700; }
-    .chip.selected { background: #22c55e; color: #fff; border-color: #16a34a; }
-
-    /* 對話氣泡 */
-    .chat-container { display: flex; flex-direction: column; gap: 14px; }
-    .chat-bubble { max-width: 86%; padding: 14px 18px; border-radius: 20px; line-height: 1.5; }
-    .chat-bubble.tourist { align-self: flex-start; background: #eff6ff; border: 1.5px solid #bfdbfe; color: #1e3a5f; border-bottom-left-radius: 4px; }
-    .chat-bubble.local { align-self: flex-end; background: #f0fdf4; border: 1.5px solid #bbf7d0; color: #14532d; border-bottom-right-radius: 4px; }
-
-    /* 3D 抽認卡 */
     .flashcard-wrap { perspective: 1000px; max-width: 480px; margin: 0 auto; height: 260px; }
     .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); transform-style: preserve-3d; cursor: pointer; }
     .flashcard-inner.flipped { transform: rotateY(180deg); }
@@ -103,18 +90,23 @@
     .fc-front { background: #ffffff; }
     .fc-back { background: #1e293b; color: #ffffff; transform: rotateY(180deg); text-align: center; }
 
+    .measure-badge { display: inline-block; background: #e0f2fe; color: #0369a1; font-weight: 800; padding: 2px 8px; border-radius: 8px; font-size: 0.85rem; margin-right: 6px; }
+
+    .place-card { background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+    .place-hero { background: #1e293b; color: #fff; padding: 20px 16px; display: flex; justify-content: space-between; align-items: center; }
+    .place-body { padding: 16px; display: flex; flex-direction: column; gap: 6px; }
+
     .tab-section { display: none; }
     .tab-section.active { display: block !important; }
   </style>
 </head>
 <body>
 
-  <!-- 頂部狀態列 -->
   <header>
     <div class="brand-group">
       <div class="brand-logo">🐼</div>
       <div>
-        <div class="brand-title">¡Hola Chino! <span style="font-size:0.7rem; background:#fee2e2; color:#ef4444; padding:2px 6px; border-radius:10px;">3.0 萬用句</span></div>
+        <div class="brand-title">¡Hola Chino! <span style="font-size:0.7rem; background:#fee2e2; color:#ef4444; padding:2px 6px; border-radius:10px;">3.0 旗艦版</span></div>
         <div class="brand-sub">Chino Real para Hispanohablantes (注音 + 拼音)</div>
       </div>
     </div>
@@ -127,22 +119,24 @@
     </div>
   </header>
 
-  <!-- 頂部水平分頁導覽列 (加入旅遊景點分頁) -->
   <div class="nav-wrap">
     <div class="top-nav">
-      <button id="nav-btn-universal" class="nav-btn active" onclick="switchMainTab('universal')">⚡ 萬用句典 (Frases Comodín)</button>
-      <button id="nav-btn-places" class="nav-btn" onclick="switchMainTab('places')">🗺️ 旅遊景點 (Lugares & Viajes)</button>
-      <button id="nav-btn-dialog" class="nav-btn" onclick="switchMainTab('dialog')">🍱 6 Diálogos Reales (情境對話)</button>
-      <button id="nav-btn-builder" class="nav-btn" onclick="switchMainTab('builder')">🗣️ Entrenador Oral (句型填空)</button>
-      <button id="nav-btn-foods" class="nav-btn" onclick="switchMainTab('foods')">🥟 Vocabulario Diario (夜市與美食)</button>
-      <button id="nav-btn-flashcards" class="nav-btn" onclick="switchMainTab('flashcards')">🎴 3D 抽認卡 (Flashcards)</button>
-      <button id="nav-btn-phonetics" class="nav-btn" onclick="switchMainTab('phonetics')">🔤 注音對照 (Guía Fonética)</button>
+      <button id="nav-btn-universal" class="nav-btn active" onclick="switchMainTab('universal')">⚡ 萬用句典</button>
+      <button id="nav-btn-breakfast" class="nav-btn" onclick="switchMainTab('breakfast')">🍳 早餐店指南</button>
+      <button id="nav-btn-measure" class="nav-btn" onclick="switchMainTab('measure')">📏 看圖學量詞</button>
+      <button id="nav-btn-travel" class="nav-btn" onclick="switchMainTab('travel')">🚆 坐火車旅行&文法</button>
+      <button id="nav-btn-places" class="nav-btn" onclick="switchMainTab('places')">🗺️ 旅遊景點</button>
+      <button id="nav-btn-dialog" class="nav-btn" onclick="switchMainTab('dialog')">🍱 6 大情境會話</button>
+      <button id="nav-btn-builder" class="nav-btn" onclick="switchMainTab('builder')">🗣️ 句型填空</button>
+      <button id="nav-btn-foods" class="nav-btn" onclick="switchMainTab('foods')">🥟 夜市美食大百科</button>
+      <button id="nav-btn-flashcards" class="nav-btn" onclick="switchMainTab('flashcards')">🎴 3D 抽認卡</button>
+      <button id="nav-btn-phonetics" class="nav-btn" onclick="switchMainTab('phonetics')">🔤 注音拼音對照</button>
     </div>
   </div>
 
   <div class="container">
 
-    <!-- 1. 萬用句典 (Frases Comodín) -->
+    <!-- 1. 萬用句典 -->
     <section id="sec-universal" class="tab-section active">
       <div class="hero-banner">
         <span class="hero-tag">¡EL SALVADOR DE LOS VIAJEROS! CN TW</span>
@@ -168,7 +162,103 @@
       <div class="cards-grid" id="universalCardsGrid"></div>
     </section>
 
-    <!-- 2. 旅遊景點與問路覓食互動器 (恢復並擴充) -->
+    <!-- 2. 早餐店指南 (圖一內容) -->
+    <section id="sec-breakfast" class="tab-section">
+      <div class="hero-banner" style="background: linear-gradient(135deg, #d97706, #f59e0b);">
+        <span class="hero-tag">DESAYUNO TAIWANÉS / 零起點課程</span>
+        <div class="hero-title">早餐店點餐指南：How to order in Taiwanese Breakfast shop</div>
+        <div class="hero-desc">Aprende a pedir como un local en las famosas tiendas de desayuno matutino de Taiwán (Mei Er Mei).</div>
+        <div class="hero-lightning">🍳</div>
+      </div>
+
+      <div class="builder-box">
+        <div style="font-size:0.85rem; font-weight:800; color:#d97706; margin-bottom:6px;">💬 DIÁLOGO REAL EN LA TIENDA DE DESAYUNO：</div>
+        <div class="chat-container">
+          <div class="chat-bubble local">
+            <div style="font-size:0.75rem; color:#64748b;">老闆娘 (Dueña)</div>
+            <div style="font-size:1.1rem; font-weight:800;">帥哥 / 美女，今天要吃什麼？ <button class="speaker-btn" style="width:26px; height:26px; font-size:0.8rem; display:inline-flex;" onclick="speakText('帥哥美女，今天要吃什麼？')">🔊</button></div>
+            <div style="font-size:0.8rem; color:var(--pinyin);">Shuàigē / Měinǚ, jīntiān yào chī shénme?</div>
+            <div style="font-size:0.8rem; color:#64748b;">"Guapo / Guapa, ¿qué vas a desayunar hoy?" (Forma muy cariñosa y común en Taiwán)</div>
+          </div>
+          <div class="chat-bubble tourist">
+            <div style="font-size:0.75rem; color:#64748b;">你 (Tú)</div>
+            <div style="font-size:1.1rem; font-weight:800;">老闆，一份培根蛋餅，還有一杯溫奶茶，謝謝！ <button class="speaker-btn" style="width:26px; height:26px; font-size:0.8rem; display:inline-flex;" onclick="speakText('老闆，一份培根蛋餅，還有一杯溫奶茶，謝謝！')">🔊</button></div>
+            <div style="font-size:0.8rem; color:var(--pinyin);">Lǎobǎn, yí fèn péigēn dànbǐng, hái yǒu yì bēi wēn nǎichá, xièxie!</div>
+            <div style="font-size:0.8rem; color:#64748b;">"Jefe, una crepe de bacon con huevo y un té con leche templado, ¡gracias!"</div>
+          </div>
+          <div class="chat-bubble local">
+            <div style="font-size:0.75rem; color:#64748b;">老闆娘 (Dueña)</div>
+            <div style="font-size:1.1rem; font-weight:800;">外帶還是內用？ <button class="speaker-btn" style="width:26px; height:26px; font-size:0.8rem; display:inline-flex;" onclick="speakText('外帶還是內用？')">🔊</button></div>
+            <div style="font-size:0.8rem; color:var(--pinyin);">Wàidài háishì nèiyòng?</div>
+            <div style="font-size:0.8rem; color:#64748b;">"¿Para llevar o para tomar aquí?"</div>
+          </div>
+          <div class="chat-bubble tourist">
+            <div style="font-size:0.75rem; color:#64748b;">你 (Tú)</div>
+            <div style="font-size:1.1rem; font-weight:800;">外帶，謝謝！ <button class="speaker-btn" style="width:26px; height:26px; font-size:0.8rem; display:inline-flex;" onclick="speakText('外帶，謝謝！')">🔊</button></div>
+            <div style="font-size:0.8rem; color:var(--pinyin);">Wàidài, xièxie!</div>
+            <div style="font-size:0.8rem; color:#64748b;">"Para llevar, ¡gracias!"</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="font-size:1.15rem; font-weight:900; margin:10px 0;">🥐 早餐店熱門品項與配料 (Menú Clásico con Pronunciación)：</div>
+      <div class="cards-grid" id="breakfastItemsGrid"></div>
+    </section>
+
+    <!-- 3. 看圖學量詞 (圖六、七、八) -->
+    <section id="sec-measure" class="tab-section">
+      <div class="hero-banner" style="background: linear-gradient(135deg, #0284c7, #0ea5e9);">
+        <span class="hero-tag">CLASIFICADORES CHINOS (量詞)</span>
+        <div class="hero-title">看圖學量詞：Clasificadores Visuales de Taiwán</div>
+        <div class="hero-desc">En chino cada animal y alimento tiene su propio clasificador. ¡Aprende los más usados con ejemplos claros!</div>
+        <div class="hero-lightning">📏</div>
+      </div>
+
+      <div class="filter-pills">
+        <button class="pill active" onclick="filterMeasures('all')">🌟 Todos</button>
+        <button class="pill" onclick="filterMeasures('animal')">🐾 動物篇 (Animales)</button>
+        <button class="pill" onclick="filterMeasures('fruit')">🍎 果蔬篇 (Frutas y Verduras)</button>
+      </div>
+
+      <div class="cards-grid" id="measureWordsGrid"></div>
+    </section>
+
+    <!-- 4. 坐火車旅行與文法 (圖二至五) -->
+    <section id="sec-travel" class="tab-section">
+      <div class="hero-banner" style="background: linear-gradient(135deg, #7c3aed, #9333ea);">
+        <span class="hero-tag">MODERN CHINESE 2 / 時代華語第 7 課</span>
+        <div class="hero-title">坐火車到花蓮去旅行 & 阿里山訂票實戰</div>
+        <div class="hero-desc">Aprende a planear viajes en tren, reservar billetes en línea y domina las gramáticas clave "剛……就……" y "趁……".</div>
+        <div class="hero-lightning">🚆</div>
+      </div>
+
+      <div class="builder-box" style="text-align:left;">
+        <div style="font-size:1rem; font-weight:900; color:#7c3aed; margin-bottom:8px;">💡 核心語法拆解 (Gramática Clave)：</div>
+        
+        <div style="background:#f8fafc; border-left:4px solid #7c3aed; padding:12px; border-radius:0 12px 12px 0; margin-bottom:12px;">
+          <div style="font-weight:900; font-size:1.05rem;">1. 剛……就…… (after $V_1$, $V_2$ happened immediately)[span_15](start_span)[span_15](end_span)</div>
+          <div style="font-size:0.85rem; color:#64748b; margin-top:2px;">Indica que una acción ocurre inmediatamente después de otra:[span_16](start_span)[span_16](end_span)</div>
+          <ul style="font-size:0.85rem; margin-top:6px; padding-left:18px; line-height:1.5;">
+            <li>沒想到剛上台鐵網站，就發現春假第一天的票賣光了。 <button class="speaker-btn" style="width:22px; height:22px; font-size:0.75rem; display:inline-flex;" onclick="speakText('沒想到剛上台鐵網站，就發現春假第一天的票賣光了。')">🔊</button>[span_17](start_span)[span_17](end_span)<br><i>"Apenas entré a la web del tren, me di cuenta de que los billetes estaban agotados."</i></li>
+            <li>剛畢業就找到了一份好工作，真是太幸運了！ <button class="speaker-btn" style="width:22px; height:22px; font-size:0.75rem; display:inline-flex;" onclick="speakText('剛畢業就找到了一份好工作，真是太幸運了！')">🔊</button>[span_18](start_span)[span_18](end_span)</li>
+          </ul>
+        </div>
+
+        <div style="background:#f8fafc; border-left:4px solid #f59e0b; padding:12px; border-radius:0 12px 12px 0;">
+          <div style="font-weight:900; font-size:1.05rem;">2. 趁（著）…… (seize the moment, take advantage of...)[span_19](start_span)[span_19](end_span)</div>
+          <div style="font-size:0.85rem; color:#64748b; margin-top:2px;">Aprovechar una ocasión, clima o tiempo favorable para hacer algo beneficioso:[span_20](start_span)[span_20](end_span)</div>
+          <ul style="font-size:0.85rem; margin-top:6px; padding-left:18px; line-height:1.5;">
+            <li>剛好趁這個機會去吃吃看嘉義有名的雞肉飯。 <button class="speaker-btn" style="width:22px; height:22px; font-size:0.75rem; display:inline-flex;" onclick="speakText('剛好趁這個機會去吃吃看嘉義有名的雞肉飯。')">🔊</button>[span_21](start_span)[span_21](end_span)<br><i>"Aprovecharé esta oportunidad para probar el famoso arroz con pollo de Chiayi."</i></li>
+            <li>趁放假去花蓮走走，看看台灣東部的風景。 <button class="speaker-btn" style="width:22px; height:22px; font-size:0.75rem; display:inline-flex;" onclick="speakText('趁放假去花蓮走走，看看台灣東部的風景。')">🔊</button>[span_22](start_span)[span_22](end_span)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="font-size:1.15rem; font-weight:900; margin:10px 0;">📖 旅行實戰生詞庫 (Vocabulario de Viaje y Transporte)：</div>
+      <div class="cards-grid" id="travelVocabGrid"></div>
+    </section>
+
+    <!-- 5. 8 大旅遊景點 -->
     <section id="sec-places" class="tab-section">
       <div class="hero-banner" style="background: linear-gradient(135deg, #0284c7, #0ea5e9);">
         <span class="hero-tag">EXPLORAR TAIWÁN</span>
@@ -177,13 +267,12 @@
         <div class="hero-lightning">🗺️</div>
       </div>
 
-      <!-- 互動造句器：不好意思，請問 [地名] 有賣 [小吃] 嗎？ -->
       <div class="builder-box">
         <div style="font-size:0.85rem; font-weight:800; color:#0284c7; text-transform:uppercase; margin-bottom:4px;">💡 Patrón de Pregunta Turística / 旅遊實戰問句：</div>
         <div class="display-zh" id="askPlaceZh">不好意思，請問西門町有賣滷肉飯嗎？</div>
         <div style="margin:4px 0;">
-          <span class="pho-py" id="askPlacePy">Bù hǎoyìsi, qǐngwèn Xīméndīng yǒu mài lǔròufàn ma?</span>
-          <span class="pho-zy" id="askPlaceZy">ㄅㄨˋ ㄏㄠˇ ㄧˋ ˙ㄙ，ㄑㄧㄥˇ ㄨㄣˋ ㄒㄧ ㄇㄣˊ ㄉㄧㄥ ㄧㄡˇ ㄇㄞˋ ㄌㄨˇ ㄖㄡˋ ㄈㄢˋ ˙ㄇㄚ？</span>
+          <span style="color:var(--pinyin); font-weight:700;" id="askPlacePy">Bù hǎoyìsi, qǐngwèn Xīméndīng yǒu mài lǔròufàn ma?</span>
+          <span style="color:var(--zhuyin); font-weight:700; margin-left:8px;" id="askPlaceZy">ㄅㄨˋ ㄏㄠˇ ㄧˋ ˙ㄙ，ㄑㄧㄥˇ ㄨㄣˋ ㄒㄧ ㄇㄣˊ ㄉㄧㄥ ㄧㄡˇ ㄇㄞˋ ㄌㄨˇ ㄖㄡˋ ㄈㄢˋ ˙ㄇㄚ？</span>
         </div>
         <div style="font-size:0.9rem; color:#64748b; font-style:italic;" id="askPlaceEs">Disculpe, ¿en Ximending venden arroz con cerdo estofado?</div>
         <button class="ctrl-badge active" style="margin-top:10px;" onclick="speakText(document.getElementById('askPlaceZh').innerText)">🔊 Escuchar Pronunciación</button>
@@ -199,12 +288,12 @@
       <div class="cards-grid" id="placesGrid"></div>
     </section>
 
-    <!-- 3. 6 大生活真實情境對話 -->
+    <!-- 6. 6 大生活真實情境會話 -->
     <section id="sec-dialog" class="tab-section">
       <div class="hero-banner" style="background: linear-gradient(135deg, #d97706, #f59e0b);">
         <span class="hero-tag">CONVERSACIONES COTIDIANAS</span>
         <div class="hero-title">台灣在地 6 大生活情境真實會話</div>
-        <div class="hero-desc">Desde pedir boba tea hasta negociar en el mercado nocturno o tomar un taxi. Toca el audio para practicar.</div>
+        <div class="hero-desc">Desde pedir té con leche boba hasta negociar en el mercado nocturno o tomar un taxi. Toca el audio para practicar.</div>
         <div class="hero-lightning">🍱</div>
       </div>
 
@@ -219,7 +308,7 @@
       <div class="chat-container" id="dialogueChatBox"></div>
     </section>
 
-    <!-- 4. 口語句型填空 (Entrenador Oral) -->
+    <!-- 7. 口語句型填空 -->
     <section id="sec-builder" class="tab-section">
       <div class="hero-banner" style="background: linear-gradient(135deg, #7c3aed, #9333ea);">
         <span class="hero-tag">ENTRENADOR DE PATRONES</span>
@@ -236,7 +325,7 @@
 
       <div class="builder-box">
         <div class="display-zh" id="builderZh">---</div>
-        <div style="margin:4px 0;"><span class="pho-py" id="builderPy">---</span> <span class="pho-zy" id="builderZy">---</span></div>
+        <div style="margin:4px 0;"><span style="color:var(--pinyin); font-weight:700;" id="builderPy">---</span> <span style="color:var(--zhuyin); font-weight:700; margin-left:8px;" id="builderZy">---</span></div>
         <div style="font-size:0.9rem; color:#64748b; font-style:italic;" id="builderEs">---</div>
         <button class="ctrl-badge active" style="margin-top:10px;" onclick="speakText(document.getElementById('builderZh').innerText)">🔊 Escuchar Oración</button>
       </div>
@@ -248,7 +337,7 @@
       <div class="chip-container" id="itemChips"></div>
     </section>
 
-    <!-- 5. 夜市美食大百科 (食材拆解) -->
+    <!-- 8. 夜市美食大百科 -->
     <section id="sec-foods" class="tab-section">
       <div class="hero-banner" style="background: linear-gradient(135deg, #b91c1c, #dc2626);">
         <span class="hero-tag">GASTRONOMÍA Y MERCADOS NOCTURNOS</span>
@@ -259,7 +348,7 @@
       <div class="cards-grid" id="foodsGrid"></div>
     </section>
 
-    <!-- 6. 3D 抽認卡 (Flashcards) -->
+    <!-- 9. 3D 抽認卡 -->
     <section id="sec-flashcards" class="tab-section">
       <div class="hero-banner" style="background: linear-gradient(135deg, #0f766e, #0d9488);">
         <span class="hero-tag">TARJETAS NEMOTÉCNICAS</span>
@@ -276,7 +365,7 @@
               <span id="fcFrontZh" style="font-size:2.2rem; font-weight:900; color:#0f172a;">珍珠奶茶</span>
               <div style="margin-top:8px;">
                 <span id="fcFrontPy" style="color:var(--pinyin); font-size:1.1rem; font-weight:700;">zhēnzhū nǎichá</span>
-                <span id="fcFrontZy" style="color:var(--zhuyin); font-size:1rem; font-weight:700;">ㄓㄣ ㄓㄨ ㄋㄞˇ ㄔㄚˊ</span>
+                <span id="fcFrontZy" style="color:var(--zhuyin); font-size:1rem; font-weight:700; margin-left:8px;">ㄓㄣ ㄓㄨ ㄋㄞˇ ㄔㄚˊ</span>
               </div>
             </div>
             <div class="fc-back">
@@ -292,49 +381,48 @@
 
         <div style="margin-top:20px; display:flex; justify-content:center; align-items:center; gap:14px;">
           <button class="ctrl-badge" onclick="prevCard()">⬅️ Anterior</button>
-          <span id="fcCounter" style="font-size:0.95rem; font-weight:800; color:#64748b;">1 / 8</span>
+          <span id="fcCounter" style="font-size:0.95rem; font-weight:800; color:#64748b;">1 / 10</span>
           <button class="ctrl-badge active" onclick="nextCard()">Siguiente ➡️</button>
         </div>
       </div>
     </section>
 
-    <!-- 7. 截圖同款注音對照表 (Guía Fonética de Contraste) -->
+    <!-- 10. 注音拼音對照表 (截圖同款) -->
     <section id="sec-phonetics" class="tab-section">
       <div style="background:#ffffff; border-radius:20px; padding:24px; border:2px solid #e2e8f0;">
-        <div style="font-size:0.8rem; font-weight:800; color:#9333ea; letter-spacing:0.5px; text-transform:uppercase;">GUÍA FONÉTICA DE CONTRASTE (注音 ⇄ 拼音)</div>
+        <div style="font-size:0.8rem; font-weight:800; color:#9333ea; letter-spacing:0.5px; text-transform:uppercase;">GUÍA FONÉTICA DE CONTRASTE (注音 ⇄ 拼音)[span_23](start_span)[span_23](end_span)</div>
         <div style="font-size:1.55rem; font-weight:900; color:#0f172a; margin:6px 0 12px; display:flex; justify-content:space-between; align-items:center;">
           <span>Domina los Sonidos con Referencias en Español</span>
           <div style="background:#ef4444; color:#fff; font-weight:900; width:34px; height:34px; border-radius:6px; display:flex; align-items:center; justify-content:center;">A</div>
         </div>
-        <p style="font-size:0.9rem; color:#64748b; margin-bottom:20px;">Aprende por qué el Pinyin no se lee como español y cómo el Zhuyin (Bopomofo) te ayuda a no confundir los sonidos con expulsión de aire (aspirados).</p>
+        <p style="font-size:0.9rem; color:#64748b; margin-bottom:20px;">Aprende por qué el Pinyin no se lee como español y cómo el Zhuyin (Bopomofo) te ayuda a no confundir los sonidos con expulsión de aire (aspirados).[span_24](start_span)[span_24](end_span)</p>
 
-        <!-- 四聲調卡片 -->
         <div class="tones-grid">
           <div class="tone-card tone-red">
-            <div style="display:flex; justify-content:space-between;"><b>1° Tono Alto ˉ</b> <button class="speaker-btn" onclick="speakText('媽')">🔊</button></div>
-            <div style="font-size:1.15rem; font-weight:900;">mā (ㄇㄚ)</div>
-            <div style="font-size:0.8rem; line-height:1.35;">Voz alta y plana. Como cantar la nota 'Do' sostenida.</div>
+            <div style="display:flex; justify-content:space-between;"><b>1° Tono Alto ˉ</b> <button class="speaker-btn" onclick="speakText('媽')">🔊</button>[span_25](start_span)[span_25](end_span)</div>
+            <div style="font-size:1.15rem; font-weight:900;">mā (ㄇㄚ)[span_26](start_span)[span_26](end_span)</div>
+            <div style="font-size:0.8rem; line-height:1.35;">Voz alta y plana. Como cantar la nota 'Do' sostenida.[span_27](start_span)[span_27](end_span)</div>
           </div>
           <div class="tone-card tone-yellow">
-            <div style="display:flex; justify-content:space-between;"><b>2° Ascendente ˊ</b> <button class="speaker-btn" onclick="speakText('麻')">🔊</button></div>
-            <div style="font-size:1.15rem; font-weight:900;">má (ㄇㄚˊ)</div>
-            <div style="font-size:0.8rem; line-height:1.35;">Como cuando en español preguntas sorprendido: "¿¿Qué??".</div>
+            <div style="display:flex; justify-content:space-between;"><b>2° Ascendente ˊ</b> <button class="speaker-btn" onclick="speakText('麻')">🔊</button>[span_28](start_span)[span_28](end_span)</div>
+            <div style="font-size:1.15rem; font-weight:900;">má (ㄇㄚˊ)[span_29](start_span)[span_29](end_span)</div>
+            <div style="font-size:0.8rem; line-height:1.35;">Como cuando en español preguntas sorprendido: "¿¿Qué??".[span_30](start_span)[span_30](end_span)</div>
           </div>
           <div class="tone-card tone-green">
-            <div style="display:flex; justify-content:space-between;"><b>3° Ondulado ˇ</b> <button class="speaker-btn" onclick="speakText('馬')">🔊</button></div>
-            <div style="font-size:1.15rem; font-weight:900;">mǎ (ㄇㄚˇ)</div>
-            <div style="font-size:0.8rem; line-height:1.35;">Baja al grave y sube un poco: como un dubitativo "Bweee-no".</div>
+            <div style="display:flex; justify-content:space-between;"><b>3° Ondulado ˇ</b> <button class="speaker-btn" onclick="speakText('馬')">🔊</button>[span_31](start_span)[span_31](end_span)</div>
+            <div style="font-size:1.15rem; font-weight:900;">mǎ (ㄇㄚˇ)[span_32](start_span)[span_32](end_span)</div>
+            <div style="font-size:0.8rem; line-height:1.35;">Baja al grave y sube un poco: como un dubitativo "Bweee-no".[span_33](start_span)[span_33](end_span)</div>
           </div>
           <div class="tone-card tone-blue">
-            <div style="display:flex; justify-content:space-between;"><b>4° Tajante ˋ</b> <button class="speaker-btn" onclick="speakText('罵')">🔊</button></div>
-            <div style="font-size:1.15rem; font-weight:900;">mà (ㄇㄚˋ)</div>
-            <div style="font-size:0.8rem; line-height:1.35;">Caída seca y autoritaria de arriba a abajo: ¡NO! ¡YA!</div>
+            <div style="display:flex; justify-content:space-between;"><b>4° Tajante ˋ</b> <button class="speaker-btn" onclick="speakText('罵')">🔊</button>[span_34](start_span)[span_34](end_span)</div>
+            <div style="font-size:1.15rem; font-weight:900;">mà (ㄇㄚˋ)[span_35](start_span)[span_35](end_span)</div>
+            <div style="font-size:0.8rem; line-height:1.35;">Caída seca y autoritaria de arriba a abajo: ¡NO! ¡YA[span_36](start_span)[span_36](end_span)!</div>
           </div>
         </div>
 
         <div class="filter-pills" style="margin-bottom:18px;">
-          <button id="pillCons" class="pill active" onclick="switchPhoneticPill('cons')">Consonantes / Iniciales (聲母 21)</button>
-          <button id="pillVoc" class="pill" onclick="switchPhoneticPill('voc')">Vocales / Finales (韻母 16)</button>
+          <button id="pillCons" class="pill active" onclick="switchPhoneticPill('cons')">Consonantes / Iniciales (聲母 21)[span_37](start_span)[span_37](end_span)</button>
+          <button id="pillVoc" class="pill" onclick="switchPhoneticPill('voc')">Vocales / Finales (韻母 16)[span_38](start_span)[span_38](end_span)</button>
         </div>
 
         <div class="cards-grid" id="phoneticCardsGrid"></div>
@@ -348,6 +436,7 @@
     let isSlow = false;
     let phoneticPill = 'cons';
     let currentFilter = 'all';
+    let currentMeasureCat = 'all';
 
     function switchMainTab(tabKey) {
       document.querySelectorAll('.tab-section').forEach(el => el.classList.remove('active'));
@@ -359,7 +448,7 @@
       if (activeBtn) activeBtn.classList.add('active');
     }
 
-    /* ================= 1. 萬用句典資料庫 ================= */
+    /* 1. 萬用句典資料庫 */
     const universalPhrases = [
       {
         cat: "help",
@@ -390,7 +479,7 @@
         zh_t: "可以借我充電 / 行動電源嗎？", zh_s: "可以借我充电 / 移动电源吗？",
         py: "Kěyǐ jiè wǒ chōngdiàn / xíngdòng diànyuán ma?",
         zy: "ㄎㄜˇ ㄧˇ ㄐㄧㄝˋ ㄨㄛˇ ㄔㄨㄥ ㄉㄧㄢˋ / ㄒㄧㄥˊ ㄉㄨㄥˋ ㄉㄧㄢˋ ㄩㄢˊ ˙ㄇㄚ？",
-        es: "¿Me puedes prestar un cargador / powerbank?",
+        es: "¿Me puedes prestar un cargador / batería portátil?",
         tip: "Para cuando te quedas sin batería en una cafetería o restaurante."
       },
       {
@@ -482,7 +571,136 @@
       });
     }
 
-    /* ================= 2. 旅遊景點與問路覓食互動器 ================= */
+    /* 2. 早餐店實戰清單 (圖一) */
+    const breakfastItems = [
+      { emoji: "🍳", zh: "蛋餅", py: "dànbǐng", es: "Crepe taiwanesa con huevo", tip: "El desayuno rey de Taiwán. Crujiente por fuera y suave dentro." },
+      { emoji: "🌽", zh: "玉米", py: "yùmǐ", es: "Maíz dulce", tip: "Uno de los rellenos de 蛋餅 más populares: 玉米蛋餅." },
+      { emoji: "🧀", zh: "起司", py: "qǐsī", es: "Queso derretido", tip: "起司蛋餅 (Crepe de queso fundido)." },
+      { emoji: "🥓", zh: "培根", py: "péigēn", es: "Bacon / Panceta", tip: "培根蛋餅 (Crepe de bacon)." },
+      { emoji: "🥟", zh: "小籠包", py: "xiǎolóngbāo", es: "Empanadillas al vapor con caldo", tip: "Canasta con caldo caliente para empezar el día." },
+      { emoji: "🍖", zh: "火腿", py: "huǒtuǐ", es: "Jamón cocido", tip: "火腿蛋三明治 (Sándwich de jamón y huevo)." },
+      { emoji: "🍝", zh: "義大利麵", py: "yìdàlì miàn", es: "Espaguetis de desayuno (鐵板麵)", tip: "Con salsa de pimienta negra o tomate." },
+      { emoji: "🍔", zh: "漢堡", py: "hànbǎo", es: "Hamburguesa de desayuno", tip: "Con huevo, mayonesa dulce taiwanesa y pepino." },
+      { emoji: "🍟", zh: "薯條", py: "shǔtiáo", es: "Patatas fritas", tip: "Acompañamiento crujiente." },
+      { emoji: "🐟", zh: "鮪魚", py: "wěiyú", es: "Atún", tip: "鮪魚蛋餅 (Crepe con atún y maíz)." },
+      { emoji: "☕", zh: "熱拿鐵", py: "rè nátiě", es: "Café latte caliente", tip: "'Rè' significa caliente." },
+      { emoji: "🧊", zh: "冰拿鐵", py: "bīng nátiě", es: "Café latte con hielo", tip: "'Bīng' significa con hielo." },
+      { emoji: "🥪", zh: "三明治", py: "sānmíngzhì", es: "Sándwich triangular", tip: "Listo para llevar rápidamente en el mostrador." }
+    ];
+
+    function renderBreakfastGrid() {
+      const grid = document.getElementById('breakfastItemsGrid');
+      grid.innerHTML = '';
+      breakfastItems.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'quote-card';
+        div.innerHTML = `
+          <div class="card-top">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="font-size:2rem;">${item.emoji}</span>
+              <div>
+                <div class="card-zh">${item.zh}</div>
+                <div class="card-py">${item.py}</div>
+              </div>
+            </div>
+            <button class="speaker-btn" onclick="speakText('${item.zh}')">🔊</button>
+          </div>
+          <div class="card-es">${item.es}</div>
+          <div class="card-tip">💡 ${item.tip}</div>
+        `;
+        grid.appendChild(div);
+      });
+    }
+
+    /* 3. 看圖學量詞資料庫 (圖六、七、八) */
+    const measureData = [
+      { cat: "animal", zh: "一匹馬", py: "yì pǐ mǎ", measure: "匹 (pǐ)", es: "un caballo", tip: "'匹' es el clasificador exclusivo para caballos." },
+      { cat: "animal", zh: "一頭牛", py: "yì tóu niú", measure: "頭 (tóu)", es: "una vaca / buey", tip: "'頭' (cabeza) se usa para ganado grande (vacas, cerdos)." },
+      { cat: "animal", zh: "一峰駱駝", py: "yì fēng luòtuo", measure: "峰 (fēng)", es: "un camello", tip: "'峰' (pico) hace referencia a las jorobas del camello." },
+      { cat: "animal", zh: "一群鴨子", py: "yì qún yāzi", measure: "群 (qún)", es: "una bandada / grupo de patos", tip: "'群' indica grupo o manada." },
+      { cat: "animal", zh: "一條蟲 / 一條魚", py: "yì tiáo chóng / yú", measure: "條 (tiáo)", es: "un gusano / un pez", tip: "'條' se usa para cosas largas, flexibles o sinuosas (peces, serpientes, ríos)." },
+      { cat: "animal", zh: "一隻雞", py: "yì zhī jī", measure: "隻 (zhī)", es: "un pollo / gallina", tip: "'隻' es el clasificador más universal para aves y animales medianos/pequeños." },
+      { cat: "animal", zh: "一對鴛鴦", py: "yí duì yuānyāng", measure: "對 (duì)", es: "una pareja de patos mandarines", tip: "'對' se usa para cosas emparejadas o novios/matrimonio." },
+      { cat: "animal", zh: "一窩蜂 / 一巢螞蟻", py: "yì wō fēng / cháo mǎyǐ", measure: "窩/巢", es: "un panal de abejas / nido de hormigas", tip: "Clasificador de nido o madriguera." },
+
+      { cat: "fruit", zh: "一根香蕉", py: "yì gēn xiāngjiāo", measure: "根 (gēn)", es: "un plátano", tip: "'根' se usa para objetos cilíndricos y delgados (plátanos, zanahorias)." },
+      { cat: "fruit", zh: "一串葡萄", py: "yí chuàn pútáo", measure: "串 (chuàn)", es: "un racimo de uvas", tip: "'串' se usa para cosas ensartadas en racimo o brochetas." },
+      { cat: "fruit", zh: "一顆草莓", py: "yì kē cǎoméi", measure: "顆 (kē)", es: "una fresa", tip: "'顆' se usa para frutas y objetos pequeños y redondos (fresas, uvas, perlas)." },
+      { cat: "fruit", zh: "一棵白菜", py: "yì kē báicài", measure: "棵 (kē)", es: "una col china", tip: "¡Ojo! '棵' con radical de árbol se usa para plantas y vegetales enteros." },
+      { cat: "fruit", zh: "一顆大蒜 / 一頭大蒜", py: "yì kē / tóu dàsuàn", measure: "顆/頭", es: "un diente de ajo / una cabeza de ajo", tip: "Diente (顆) vs Cabeza entera (頭)." },
+      { cat: "fruit", zh: "一個蘋果", py: "yí gè píngguǒ", measure: "個 (gè)", es: "una manzana", tip: "'個' es el clasificador genérico más común." },
+      { cat: "fruit", zh: "一塊西瓜", py: "yí kuài xīguā", measure: "塊 (kuài)", es: "una tajada de sandía", tip: "'塊' se usa para trozos, rodajas o pedazos cortados." },
+      { cat: "fruit", zh: "一盤水果", py: "yì pán shuǐguǒ", measure: "盤 (pán)", es: "un plato de frutas", tip: "'盤' se usa para cosas servidas en plato." },
+      { cat: "fruit", zh: "一根胡蘿蔔", py: "yì gēn húluóbo", measure: "根 (gēn)", es: "una zanahoria", tip: "Clasificador largo '根'." }
+    ];
+
+    function filterMeasures(cat) {
+      currentMeasureCat = cat;
+      document.querySelectorAll('#sec-measure .filter-pills .pill').forEach((btn, i) => {
+        btn.classList.toggle('active', ['all','animal','fruit'][i] === cat);
+      });
+      renderMeasureGrid();
+    }
+
+    function renderMeasureGrid() {
+      const grid = document.getElementById('measureWordsGrid');
+      grid.innerHTML = '';
+      measureData.forEach(item => {
+        if (currentMeasureCat !== 'all' && item.cat !== currentMeasureCat) return;
+        const div = document.createElement('div');
+        div.className = 'quote-card';
+        div.innerHTML = `
+          <div class="card-top">
+            <div>
+              <span class="measure-badge">${item.measure}</span>
+              <span class="card-zh">${item.zh}</span>
+            </div>
+            <button class="speaker-btn" onclick="speakText('${item.zh}')">🔊</button>
+          </div>
+          <div class="card-py">${item.py}</div>
+          <div class="card-es">${item.es}</div>
+          <div class="card-tip">💡 ${item.tip}</div>
+        `;
+        grid.appendChild(div);
+      });
+    }
+
+    /* 4. 旅行與火車實戰生詞庫 (圖二至五) */
+    const travelVocab = [
+      { zh: "計畫 / 計劃", py: "jìhuà", es: "hacer planes / planear", tip: "我計畫暑假跟朋友到南部去走走。" },
+      { zh: "春假", py: "chūnjià", es: "vacaciones de primavera", tip: "Dias festivos escolares de abril en Taiwán." },
+      { zh: "森林遊樂區", py: "sēnlín yóulèqū", es: "parque forestal recreativo", tip: "阿里山森林遊樂區 (Parque recreativo de Alishan)." },
+      { zh: "走走", py: "zǒuzou", es: "pasear sin rumbo fijo", tip: "去花蓮走走放鬆心情。" },
+      { zh: "行李", py: "xínglǐ", es: "equipaje / maleta (clasificador: 件 jiàn)", tip: "不必帶太多行李。" },
+      { zh: "大衣 / 外套", py: "dàyī / wàitào", es: "abrigo largo / chaqueta", tip: "山上氣溫低，要記得帶一件外套。" },
+      { zh: "雨衣", py: "yǔyī", es: "chubasquero / impermeable", tip: "台灣山區容易下雨，雨衣很實用。" },
+      { zh: "團體旅遊", py: "tuántǐ lǚyóu", es: "viaje en grupo organizado", tip: "雖然省事，但自由行更自由。" },
+      { zh: "自由", py: "zìyóu", es: "libre / libertad", tip: "自己去旅行比較自由。" },
+      { zh: "趕（趕時間）", py: "gǎn", es: "tener prisa / apresurarse", tip: "因為我趕時間，所以搭計程車去車站。" },
+      { zh: "當天", py: "dàngtiān", es: "el mismo día", tip: "看房子當天就簽約了 / 當天晚上就能看到星星。" },
+      { zh: "訂車票 / 機票", py: "dìng chēpiào", es: "reservar billetes de tren / avión", tip: "上台灣鐵路局網站訂票。" }
+    ];
+
+    function renderTravelVocab() {
+      const grid = document.getElementById('travelVocabGrid');
+      grid.innerHTML = '';
+      travelVocab.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'quote-card';
+        div.innerHTML = `
+          <div class="card-top">
+            <div class="card-zh">${item.zh}</div>
+            <button class="speaker-btn" onclick="speakText('${item.zh}')">🔊</button>
+          </div>
+          <div class="card-py">${item.py}</div>
+          <div class="card-es">${item.es}</div>
+          <div class="card-tip">💡 例句：${item.tip}</div>
+        `;
+        grid.appendChild(div);
+      });
+    }
+
+    /* 5. 旅遊景點與問路覓食互動器 */
     const travelPlaces = [
       { zh: "西門町", py: "Xīméndīng", zy: "ㄒㄧ ㄇㄣˊ ㄉㄧㄥ", es: "Ximending", desc: "El centro comercial y juvenil más famoso de Taipéi." },
       { zh: "台北101", py: "Táiběi yī-líng-yī", zy: "ㄊㄞˊ ㄅㄟˇ ㄧ ㄌㄧㄥˊ ㄧ", es: "Taipéi 101", desc: "El emblemático rascacielos con mirador de la capital." },
@@ -560,7 +778,7 @@
       });
     }
 
-    /* ================= 3. 6 大真實生活情境會話 ================= */
+    /* 6. 6 大真實生活情境會話 */
     const dialoguesList = [
       {
         name: "手搖飲店",
@@ -624,7 +842,7 @@
       });
     }
 
-    /* ================= 4. 口語句型構造器 ================= */
+    /* 7. 口語句型構造器 */
     const builderData = {
       boba: {
         patterns: [
@@ -701,7 +919,7 @@
       document.getElementById('builderEs').innerText = p.es.replace('[___]', it.es);
     }
 
-    /* ================= 5. 美食大百科 ================= */
+    /* 8. 美食大百科 */
     const foodsList = [
       { emoji: "🍗", zh: "鹹酥雞", py: "xiánsūjī", zy: "ㄒㄧㄢˊ ㄙㄨ ㄐㄧ", es: "Pollo frito sal y pimienta con albahaca", comps: ["炸雞塊 (pollo)", "九層塔 (albahaca)", "地瓜條 (patata dulce)"] },
       { emoji: "🌭", zh: "大腸包小腸", py: "dàcháng bāo xiǎocháng", zy: "ㄉㄚˋ ㄔㄤˊ ㄅㄠ ㄒㄧㄠˇ ㄔㄤˊ", es: "Salchicha en arroz glutinoso", comps: ["糯米腸 (arroz)", "黑豬肉香腸 (salchicha)", "生大蒜 (ajo)"] },
@@ -741,7 +959,7 @@
       });
     }
 
-    /* ================= 6. 3D 抽認卡 ================= */
+    /* 9. 3D 抽認卡 */
     const flashcardsData = [
       { emoji: "🧋", zh: "珍珠奶茶", py: "zhēnzhū nǎichá", zy: "ㄓㄣ ㄓㄨ ㄋㄞˇ ㄔㄚˊ", es: "Té con leche y perlas", tip: "'Zhēnzhū' = Perlas del mar. 'Nǎichá' = Té con leche." },
       { emoji: "🍳", zh: "蛋餅", py: "dànbǐng", zy: "ㄉㄢˋ ㄅㄧㄥˇ", es: "Crepe con huevo", tip: "'Dàn' = Huevo, 'Bǐng' = Masa plana. Desayuno clásico." },
@@ -767,7 +985,7 @@
     function nextCard() { curFcIdx = (curFcIdx + 1) % flashcardsData.length; renderFlashcard(); }
     function prevCard() { curFcIdx = (curFcIdx - 1 + flashcardsData.length) % flashcardsData.length; renderFlashcard(); }
 
-    /* ================= 7. 截圖同款注音對照表 ================= */
+    /* 10. 截圖同款注音對照表 */
     const consonantsList = [
       { zy: "ㄅ", py: "b", hanzi: "八", truco: "Como una 'p' suave en español (sin expulsar aire)." },
       { zy: "ㄆ", py: "p", hanzi: "怕", truco: "'p' aspirada con un soplido fuerte de aire (mueve un papel)." },
@@ -844,7 +1062,7 @@
       });
     }
 
-    /* ================= 語音播放與繁簡切換 ================= */
+    /* 語音播放與繁簡切換 */
     function speakText(txt) {
       if (!('speechSynthesis' in window)) return;
       window.speechSynthesis.cancel();
@@ -858,6 +1076,9 @@
       isTrad = !isTrad;
       document.getElementById('toggleChar').innerText = isTrad ? '🇹🇼 繁體 (TC)' : '🇨🇳 简体 (SC)';
       renderUniversal();
+      renderBreakfastGrid();
+      renderMeasureGrid();
+      renderTravelVocab();
       updateAskPlaceSentence();
       loadDialogue(0);
       updateBuilderSentence();
@@ -872,8 +1093,11 @@
       b.classList.toggle('active', isSlow);
     }
 
-    // 啟動載入
+    // 初始化啟動
     renderUniversal();
+    renderBreakfastGrid();
+    renderMeasureGrid();
+    renderTravelVocab();
     renderPlaceSelectors();
     updateAskPlaceSentence();
     renderPlacesGrid();
